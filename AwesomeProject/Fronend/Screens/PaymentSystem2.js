@@ -1,7 +1,8 @@
 import React,{useState} from 'react'
-import { View, Text, Image, ScrollView} from 'react-native'
+import { View, Text, Image, ScrollView, Linking, Alert} from 'react-native'
 import {Button} from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
+import { WebView } from 'react-native-webview';
 
 
 
@@ -21,11 +22,13 @@ const [text, setText] = useState('');
 
         
             
-        <Button style={{backgroundColor: '#10047c', marginTop:60, width: '50%'}} mode="contained" onPress={() => navigation.navigate('UstaadConfirmation')}>
+        <Button style={{backgroundColor: '#10047c', marginTop:60, width: '50%'}} mode="contained" onPress={() => { Linking.openURL("https://buy.stripe.com/test_aEUaI00Zo9CA0xi288")}}>
+
               Next
             </Button>   
-        
-          
+            {/* https://buy.stripe.com/test_aEUaI00Zo9CA0xi288 
+               return(<WebView source={{ uri: 'https://buy.stripe.com/test_aEUaI00Zo9CA0xi288' }} />)
+            */}          
             
         </View>           
   </ScrollView>

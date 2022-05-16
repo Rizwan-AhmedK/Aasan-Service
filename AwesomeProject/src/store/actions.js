@@ -21,9 +21,6 @@ let email = "" ,pass="";
 let status=false;
 
 export const Login = (username, password) => {
-
-
-
   fetch("http://10.0.2.2:3000/login", {
     method : "post",
     headers:{
@@ -31,17 +28,14 @@ export const Login = (username, password) => {
     },
     body:JSON.stringify({
         email: username,
-        pass: password,
-        
+        pass: password, 
     })
-
 })
 
 .then(res=>res.json())
 .then(async (data) => {
   // email = data.data.email;
   // pass = data.data.pass;
-  console.log(data)
   status = data.success
   
 }).catch(err => {

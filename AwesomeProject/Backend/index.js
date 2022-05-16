@@ -26,6 +26,13 @@ mongoose.connection.on("error", (err) => {
     console.log("error while connecting", err)
 })
 
+app.get('/fetch', (req, res) => {
+   const {_id} = req.body;
+    Users.findById({_id}).then(data => {
+        res.send(data)
+    })
+})
+
 app.post('/login', (req , res) => {
     const {email, pass} =  req.body;
 
@@ -126,7 +133,7 @@ app.post('/delete', (req,res) => {
 
 app.post('/update', (req,res) => {
     Users.findByIdAndUpdate(req.body.id, {
-             name:req.body.name,
+        name:req.body.name,
         email:req.body.email,
         pass:req.body.pass,
         repass:req.body.repass,

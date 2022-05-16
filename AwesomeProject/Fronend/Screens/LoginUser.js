@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { View, Text, Image, KeyboardAvoidingView} from 'react-native'
+import { View, Text, Image, KeyboardAvoidingView, Alert} from 'react-native'
 import { TextInput, Button } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import { useDispatch } from 'react-redux';
@@ -17,14 +17,18 @@ const navigation = useNavigation();
 const [username, setUsername] = useState('');
 const [password, setPassword] = useState('');
 
-const [loading, setLoading] = useState(true);
-const [data, setData] = useState([]);
+
+
+const [data, setData] = useState([])
+const [loading, setLoading] = useState(false)
+
 
 
 
 const dispatch = useDispatch();
 const submit = () => {
   dispatch(Login(username, password))
+ 
   // navigation.navigate("UserMainScreen", {hello: "pakistan"})
 }
 

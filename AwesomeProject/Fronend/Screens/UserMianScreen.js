@@ -1,15 +1,28 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { View, Text, Image, StyleSheet, ScrollView} from 'react-native'
 import { TextInput, Button, Avatar, IconButton, Colors  } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
-import { useDispatch } from 'react-redux';
-import { Logout } from '../../src/store/actions';
+
 
 
 export default function UserMainScreen({route}) {
     // console.log(route.params.hello)
 const navigation = useNavigation();
+const [data, setData] = useState([])
+const [loading, setLoading] = useState(false)
 
+
+// useEffect(() => {
+//     fetch("http://10.0.2.2:3000/fetch")
+//     .then(res=>res.json())
+//     .then(results => {
+//         console.log(results)
+//         setData(results)
+//         setLoading(false)
+//     })
+// },[])
+
+// console.log(data.email)
 
     return (
         <ScrollView>
