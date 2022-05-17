@@ -33,7 +33,7 @@ app.get('/fetch', (req, res) => {
     })
 })
 
-app.post('/login', (req , res) => {
+app.post('/login', async(req , res) => {
     const {email, pass} =  req.body;
 
     Users.findOne({email}).then(data => {
@@ -45,7 +45,9 @@ app.post('/login', (req , res) => {
                     res.status(200).json({
                         success: true,
                         data
-                    })}
+                    })
+                   
+                }
                 else {
                     res.status(401).json({message: "invalid creditional" , success: false,  compareRes});
             }})

@@ -1,6 +1,7 @@
 
 const initialState = {
   authToken: null,
+  data:[],
 }
 
 export default (state = initialState, action) => {

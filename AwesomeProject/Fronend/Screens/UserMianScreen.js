@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { View, Text, Image, StyleSheet, ScrollView} from 'react-native'
 import { TextInput, Button, Avatar, IconButton, Colors  } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { parse } from '@babel/core';
 
 
 
@@ -12,15 +14,26 @@ const [data, setData] = useState([])
 const [loading, setLoading] = useState(false)
 
 
-// useEffect(() => {
-//     fetch("http://10.0.2.2:3000/fetch")
-//     .then(res=>res.json())
-//     .then(results => {
-//         console.log(results)
-//         setData(results)
-//         setLoading(false)
-//     })
-// },[])
+const fun = async() => {
+    const user = await AsyncStorage.getItem('user');
+    setData(JSON.parse(user))
+}
+
+
+
+useEffect(() => {
+    fun()
+
+    // fetch("http://10.0.2.2:3000/fetch")
+    // .then(res=>res.json())
+    // .then(results => {
+    //     console.log(results)
+    //     setData(results)
+    //     setLoading(false)
+    // })
+},[])
+
+
 
 // console.log(data.email)
 
@@ -29,7 +42,7 @@ const [loading, setLoading] = useState(false)
         <View style={{backgroundColor: '#10047c', flex: 1}}>
         <View style={{backgroundColor: '#10047c', flex: 1, alignItems: 'center', justifyContent: 'center', marginTop: 10}}> 
             <Avatar.Image  size={60} source={require('../../src/assets/Login.png')} />
-        <Text style={{color: "white", fontSize: 20, marginTop: 10, marginBottom: 10, textAlign: 'center'}}>Rizwan Ahmed {'\n'} <Text style={{fontSize: 15}}>Electrician</Text></Text>
+        <Text style={{color: "white", fontSize: 20, marginTop: 10, marginBottom: 10, textAlign: 'center'}}>{data.data._id} {'\n'} <Text style={{fontSize: 15}}>Electrician</Text></Text>
 
         <View style={{flex: 1, flexDirection: 'row', alignContent: 'center', alignItems: 'center'}}>
             <IconButton icon="cog" color='white' size={20} onPress={() => console.log('Pressed')} />
