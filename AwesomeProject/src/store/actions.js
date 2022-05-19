@@ -34,7 +34,7 @@ export const Login = (username, password) => {
 
 .then(res=>res.json())
 .then(async (data) => {
-//  
+console.log(data)
   await AsyncStorage.setItem('user', JSON.stringify(data));
   // email = data.data.email;
   // pass = data.data.pass;

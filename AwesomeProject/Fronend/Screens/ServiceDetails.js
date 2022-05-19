@@ -18,12 +18,15 @@ Alert.alert(
   ]
 );
 
-export default function ServiceDetail() {
+export default function ServiceDetail({route}) {
+  const field = route.params.Field;
+  const id = route.params.Id;
+
 const navigation = useNavigation();
 const [checked, setChecked] = React.useState(false);
 
     const [problemDescription, setproblemDescription] = React.useState('');
-    console.log(problemDescription)
+    
     return (
         
         <KeyboardAvoidingView  style={{backgroundColor: '#10047c',flex: 1, flexDirection: 'column'}}>
@@ -56,7 +59,7 @@ const [checked, setChecked] = React.useState(false);
            
         <Button icon="arrow-right-bold" style={{backgroundColor: '#10047c', marginTop: 20, marginBottom: 20}} mode="contained" onPress={() => {
               if (checked) {
-                navigation.navigate('ServiceDetailStep2')}
+                navigation.navigate('ServiceDetailStep2', {Field: field, Id:id, ProblemStatement: problemDescription})}
                else{createTwoButtonAlert()}}}>
               Next
             </Button>

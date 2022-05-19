@@ -16,7 +16,9 @@ const MyStatusBar = ({ backgroundColor, ...props }) => (
     <StatusBar translucent backgroundColor={backgroundColor} {...props} />
   </View>
 );
-   
+ 
+
+let Id, Field, ProblemStatement, lat, long = "";
 
 class Dashboard extends Component {
 
@@ -31,15 +33,19 @@ class Dashboard extends Component {
       },
     };
   }
-
+ 
   componentDidMount() {
-    const { navigation } = this.props;
+    const { navigation, route } = this.props;
+ 
     Geolocation.getCurrentPosition((info) => {
-      let lat = info.coords.latitude;
-      let long = info.coords.longitude;
+      lat = info.coords.latitude;
+      long = info.coords.longitude;
+      
+      Id = route.params.Id;
+      Field = route.params.Field;
+      ProblemStatement = route.params.ProblemStatement;
 
-      console.log(lat);
-      console.log(long);
+
       var initialRegion = {
         latitude: lat,
         longitude: long,
@@ -69,7 +75,11 @@ class Dashboard extends Component {
 
         <View style={{alignContent: "center", alignItems: "center"}}>
             <Button style={{backgroundColor: '#10047c', marginTop: 40, paddingLeft: 8, paddingRight: 8, width: '50%'}} mode="contained" onPress={() => this.props.navigation.navigate('ServiceDetailStep3',  {
-              paramKey: 'Pakistan', hello: 'zindabad'
+              Id: Id,
+              Field: Field,
+              ProblemStatement: ProblemStatement,
+              latitude: lat,
+              longitude: long
             })}>
              Next
           </Button>

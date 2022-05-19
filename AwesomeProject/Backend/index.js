@@ -118,6 +118,16 @@ app.post('/ustaadsignup', async(req, res) => {
     })
 })
 
+//api find ustaad where role == ustaad
+app.get('/ustaadlist', async(req, res) => { 
+    Users.find({role: "Ustaad"}).then(data=>{
+        console.log(data)
+        res.send(data)
+    }).catch(err=>{
+        console.log(err)
+    })
+})
+
 
 
 app.post('/delete', (req,res) => {

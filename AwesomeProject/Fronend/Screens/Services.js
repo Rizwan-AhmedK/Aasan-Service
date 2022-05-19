@@ -4,7 +4,8 @@ import { TextInput, Button, IconButton } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 
 
-export default function Services() {
+export default function Services({route}) {
+   const id =  route.params.Id;
 const navigation = useNavigation();
 
     const [text, setText] = React.useState('');
@@ -17,14 +18,14 @@ const navigation = useNavigation();
         </View>
 
         <View style={{backgroundColor: 'white', alignItems: 'center', flex: 2.5, borderTopLeftRadius: 30, borderTopRightRadius: 30}}>
-        <View style={{alignItems: 'center', flexDirection: 'row'}}>
+        <View style={{alignItems: 'center', flexDirection: 'row'}} >
                 <View style={{alignItems: 'center', margin: 12, marginRight: 45, alignContent: 'center', padding: 25, borderRadius: 10}}>
-                    <IconButton icon="transmission-tower" color='#10047c' size={35} onPress={() => navigation.navigate("ServiceDetail")} />
+                    <IconButton icon="transmission-tower" color='#10047c' size={35} onPress={() => navigation.navigate("ServiceDetail", {Field: "Electrician", Id: id})} />
                     <Text style={{color: '#10047c', fontSize: 20}}>Electrician</Text>
                 </View>
 
                 <View style={{alignItems: 'center', margin: 8, marginRight: 25, alignContent: 'center', padding: 25, borderRadius: 10}}>
-                    <IconButton icon="pipe-disconnected" color='#10047c' size={35} onPress={() => console.log('Pressed')} />
+                    <IconButton icon="pipe-disconnected" color='#10047c' size={35} onPress={() => navigation.navigate("ServiceDetail", {Field: "Plumber", Id: id})} />
                     <Text style={{color: '#10047c', fontSize: 20}}>Plumber</Text>
                 </View>
             </View>
@@ -32,12 +33,12 @@ const navigation = useNavigation();
 
             <View style={{alignItems: 'center', flexDirection: 'row'}}>
                 <View style={{alignItems: 'center', margin: 8, alignContent: 'center', padding: 25, borderRadius: 10}}>
-                    <IconButton icon="air-conditioner" color='#10047c' size={35} onPress={() => console.log('Pressed')} />
+                    <IconButton icon="air-conditioner" color='#10047c' size={35} onPress={() => navigation.navigate("ServiceDetail", {Field: "AC Machenic", Id: id})} />
                     <Text style={{color: '#10047c', fontSize: 20}}>AC Machenic</Text>
                 </View>
 
                 <View style={{alignItems: 'center', margin: 8, alignContent: 'center', padding: 25, borderRadius: 10}}>
-                    <IconButton icon="car" color='#10047c' size={35} onPress={() => console.log('Pressed')} />
+                    <IconButton icon="car" color='#10047c' size={35} onPress={() => navigation.navigate("ServiceDetail", {Field: "Car Machenic", Id: id})} />
                     <Text style={{color: '#10047c', fontSize: 20}}>Car Machenic</Text>
                 </View>
             </View>
@@ -45,12 +46,12 @@ const navigation = useNavigation();
 
             <View style={{alignItems: 'center', flexDirection: 'row', paddingBottom: 5}}>
                 <View style={{alignItems: 'center', margin: 8, marginRight: 35, alignContent: 'center', padding: 25, borderRadius: 10}}>
-                    <IconButton icon="desktop-classic" color='#10047c' size={35} onPress={() => console.log('Pressed')} />
+                    <IconButton icon="desktop-classic" color='#10047c' size={35} onPress={() => navigation.navigate("ServiceDetail", {Field: "Pc Machenic", Id: id})} />
                     <Text style={{color: '#10047c', fontSize: 20}}>Pc Machenic</Text>
                 </View>
 
                 <View style={{alignItems: 'center', margin: 8, alignContent: 'center', marginRight: 20, padding: 25, borderRadius: 10}}>
-                    <IconButton icon="table-furniture" color='#10047c' size={35} onPress={() => navigation.navigate('Home')}/>
+                    <IconButton icon="table-furniture" color='#10047c' size={35} onPress={() => navigation.navigate("ServiceDetail", {Field: "Carpenter", Id: id})}/>
                     <Text style={{color: '#10047c', fontSize: 20}}>Carpenter</Text>
                 </View>
             </View>

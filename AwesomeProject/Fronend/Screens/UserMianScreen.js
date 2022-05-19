@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { View, Text, Image, StyleSheet, ScrollView} from 'react-native'
-import { TextInput, Button, Avatar, IconButton, Colors  } from 'react-native-paper';
+import { TextInput, Button, Avatar, IconButton, Colors, ActivityIndicator  } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { parse } from '@babel/core';
@@ -11,20 +11,28 @@ export default function UserMainScreen({route}) {
     // console.log(route.params.hello)
 const navigation = useNavigation();
 const [data, setData] = useState([])
-const [loading, setLoading] = useState(false)
+const [newdata, setNewData] = useState([])
+const [loading, setLoading] = useState(true)
 
 
 const fun = async() => {
     const user = await AsyncStorage.getItem('user');
     setData(JSON.parse(user))
+    console.log(user,"hello")
 }
 
 
 
 useEffect(() => {
     fun()
-
-    // fetch("http://10.0.2.2:3000/fetch")
+        if(data.length > 0){
+            setLoading(false)
+            console.log(data)
+            }
+    
+  
+    // const id = {_id:data.data._id};
+    // fetch("http://10.0.2.2:3000/fetch", {method: "get", body: JSON.stringify(id)})
     // .then(res=>res.json())
     // .then(results => {
     //     console.log(results)
@@ -36,13 +44,23 @@ useEffect(() => {
 
 
 // console.log(data.email)
-
+    if(data.length == 0){   
+        return(
+            <ActivityIndicator
+               animating = {loading}
+               color = '#bc2b78'
+               size = "large"
+               />
+        )
+    }
+    else{
+        id = data.data._id;
     return (
         <ScrollView>
         <View style={{backgroundColor: '#10047c', flex: 1}}>
         <View style={{backgroundColor: '#10047c', flex: 1, alignItems: 'center', justifyContent: 'center', marginTop: 10}}> 
             <Avatar.Image  size={60} source={require('../../src/assets/Login.png')} />
-        <Text style={{color: "white", fontSize: 20, marginTop: 10, marginBottom: 10, textAlign: 'center'}}>{data.data._id} {'\n'} <Text style={{fontSize: 15}}>Electrician</Text></Text>
+        <Text style={{color: "white", fontSize: 20, marginTop: 10, marginBottom: 10, textAlign: 'center'}}>{data.data.name}{'\n'} <Text style={{fontSize: 15}}>User</Text></Text>
 
         <View style={{flex: 1, flexDirection: 'row', alignContent: 'center', alignItems: 'center'}}>
             <IconButton icon="cog" color='white' size={20} onPress={() => console.log('Pressed')} />
@@ -52,7 +70,7 @@ useEffect(() => {
         </View>
 
         <View style={{backgroundColor: 'white', alignItems: 'center', flex: 2.5, borderTopLeftRadius: 30, borderTopRightRadius: 30}}>
-        <Button style={{marginTop: 50, backgroundColor: '#10047c', paddingLeft: 5, paddingRight: 5}} mode="contained" onPress={() => navigation.navigate('Services')}>
+        <Button style={{marginTop: 50, backgroundColor: '#10047c', paddingLeft: 5, paddingRight: 5}} mode="contained" onPress={() => navigation.navigate('Services',{Id:id})}>
              Services
             </Button>
 
@@ -83,6 +101,7 @@ useEffect(() => {
   </View>
         </ScrollView>
         
-    )
+    )}
+        
 }
 
