@@ -4,9 +4,10 @@ import { TextInput, Button, Avatar, IconButton, Colors  } from 'react-native-pap
 import { useNavigation } from '@react-navigation/native';
 import { Rating } from 'react-native-ratings';
 
-export default function UserMainScreen() {
+export default function UserMainScreen({route}) {
 const navigation = useNavigation();
-
+const id = route.params.UstaadId;
+console.log(id)
     return (
         <ScrollView>
         <View style={{backgroundColor: '#10047c', flex: 1}}>
