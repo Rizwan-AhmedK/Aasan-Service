@@ -5,15 +5,13 @@ import { useNavigation } from '@react-navigation/native';
 
 import { Rating } from 'react-native-ratings';
 
-
-
 export default function Services({route}) {
 
-    console.log(route.params.Id)
-    console.log(route.params.Field)
-    console.log(route.params.ProblemStatement)
-    console.log(route.params.latitude)
-    console.log(route.params.longitude)
+    const id = route.params.Id
+    const field = route.params.Field
+    const problemStatement = route.params.ProblemStatement
+    const Latitude = route.params.latitude
+    const Longitude = route.params.longitude
 const navigation = useNavigation();
 
 const [data, setData] = useState([])
@@ -25,12 +23,12 @@ useEffect(()=>{
     .then((data) => {
         setData(data)
         setloading(true)
+        console.log("hello")
 
 }).catch(err => {
     console.log(err)
 })
 },[])
-
 
     return (
         <ScrollView  style={{backgroundColor: '#10047c',flex: 1, flexDirection: 'column'}}>
@@ -58,8 +56,23 @@ useEffect(()=>{
                      <Text style={{marginTop: 10, fontWeight: 'bold', color: '#10047c'}}>{value.name}{'\n'} 
                      <Text style={{color: 'gray'}}>{value.field}{'\n'}</Text>
                      <Rating showRating={false} rating={5} maxStars={5} starCount={5} onFinishRating={(ratings) => {console.log("ratting is" + ratings)}}  imageSize={15} style={{ paddingVertical: 1 }}/></Text>
-                    <IconButton style={{marginTop: 15, position: 'absolute', right: 50}} icon="arrow-right-circle" color='#10047c' size={30} onPress={() => navigation.navigate("SeeUstaadProfile",  {UstaadId: value._id})}  /> 
-                    <IconButton style={{marginTop: 15, position: 'absolute', right: 10}} icon="account" color='#10047c' size={30} onPress={() => console.log('Pressed')} />
+                    <IconButton style={{marginTop: 15, position: 'absolute', right: 50}} icon="arrow-right-circle" color='#10047c' size={30} onPress={() => navigation.navigate("SeeUstaadProfile",  {
+                        Ustaaddata: {value},
+                        userid: id,
+                        ustaadId: value._id,
+                        field: field,
+                        ProblemStatement: problemStatement,
+                        latitude: Latitude,
+                        logitude: Longitude
+                        })}  /> 
+                    <IconButton style={{marginTop: 15, position: 'absolute', right: 10}} icon="account" color='#10047c' size={30} onPress={() => navigation.navigate("EnterDetails",  {
+                        userid: id,
+                        field: field,
+                        ProblemStatement: problemStatement,
+                        latitude: Latitude,
+                        logitude: Longitude,
+                        ustaadId: value._id,
+                    })} />
                 </View>
                 <View style={{ borderBottomColor: 'black', borderBottomWidth: 1}} />
                     </>
@@ -69,3 +82,7 @@ useEffect(()=>{
         </ScrollView>       
     )
 }
+
+
+
+

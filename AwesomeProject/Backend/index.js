@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt');
 
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose');
+const { ObjectId } = require('mongodb');
 
 
 require('./Users')
@@ -26,12 +27,17 @@ mongoose.connection.on("error", (err) => {
     console.log("error while connecting", err)
 })
 
-app.get('/fetch', (req, res) => {
-   const {_id} = req.body;
-    Users.findById({_id}).then(data => {
+app.get('/user-recodrs/:id', (req, res) => {
+    console.log(req.params.id)
+    Users.findById(req.params.id)
+    .then(data => {
         res.send(data)
     })
+    .catch(err => {
+        res.send(err)
+    })
 })
+
 
 app.post('/login', async(req , res) => {
     const {email, pass} =  req.body;
@@ -46,7 +52,6 @@ app.post('/login', async(req , res) => {
                         success: true,
                         data
                     })
-                   
                 }
                 else {
                     res.status(401).json({message: "invalid creditional" , success: false,  compareRes});
@@ -89,9 +94,6 @@ app.post('/usersignup', async(req, res) => {
     })
 }
 })
-
-
-
 
 
 app.post('/ustaadsignup', async(req, res) => { 
@@ -164,13 +166,3 @@ app.post('/update', (req,res) => {
 app.listen(3000, () => {
     console.log('server running')
 })
-
-
-
-
-
-
-
-
-
-

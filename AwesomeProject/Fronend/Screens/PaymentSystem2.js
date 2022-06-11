@@ -4,8 +4,6 @@ import {Button} from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import { WebView } from 'react-native-webview';
 
-
-
 export default function PaymentSystem2() {
 const navigation = useNavigation();
 const [text, setText] = useState('');
@@ -27,8 +25,7 @@ const [text, setText] = useState('');
               Next
             </Button>   
             {/* https://buy.stripe.com/test_aEUaI00Zo9CA0xi288 
-            return(<WebView source={{ uri: 'https://buy.stripe.com/test_aEUaI00Zo9CA0xi288' }} />) */}          
-            
+            return(<WebView source={{ uri: 'https://buy.stripe.com/test_aEUaI00Zo9CA0xi288' }} />) */}                                                                          
         </View>           
   </ScrollView>
         

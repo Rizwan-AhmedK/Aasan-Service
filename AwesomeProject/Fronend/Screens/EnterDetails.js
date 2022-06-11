@@ -1,12 +1,34 @@
-import React,{useState} from 'react'
-import { View, Text, Image, ScrollView} from 'react-native'
+import React,{useEffect, useState} from 'react'
+import { View, Text, Image, ScrollView, Alert, MaskedViewComponent} from 'react-native'
 import { TextInput, Button } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import DatePicker from 'react-native-date-picker';
 
 
 
-export default function EnterDetails() {
+export default function EnterDetails({route}) {
+  const [data, setData] = useState([])
+
+const id = route.params.userid;
+const ustaadId = route.params.ustaadId;
+const field = route.params.field;
+const ProblemStatement = route.params.ProblemStatement;
+const latitude = route.params.latitude;
+const longitude = route.params.logitude;
+
+console.log(id, field, ProblemStatement, latitude, longitude, ustaadId)
+
+
+useEffect(() => {
+  fetch(`http://10.0.2.2:3000/user-recodrs/${id}`)
+  .then((res) => res.json())
+  .then (data => {
+    setData(data)
+  })
+},[])
+
+
+
 const navigation = useNavigation();
 const [date, setDate] = useState(new Date())
 const [open, setOpen] = useState(false)
@@ -15,7 +37,7 @@ const [serviceDetailsName, setServiceDetailsName] = useState('')
 const [serviceDetailsPhone, setServiceDetailsPhone] = useState('')
 const [serviceDetailsAddress, setServiceDetailsAddress] = useState('')
 
-console.log(serviceDetailsAddress)
+console.log(data.email)
 
     return (
         <ScrollView>
@@ -54,7 +76,6 @@ console.log(serviceDetailsAddress)
             left={<TextInput.Icon name="lock" color="#10047c" />}
             />
 
-
             <TextInput 
             value={serviceDetailsAddress}
             onChangeText={setServiceDetailsAddress}
@@ -68,35 +89,58 @@ console.log(serviceDetailsAddress)
 
 <Text style={{marginTop: 20, fontWeight: 'bold'}} >Please select Date and Time</Text>
 
-
     <Button 
-        title="SELECT DATE AND TIME" 
+        title="open" 
         onPress={() => setOpen(true)} 
-        style={{marginTop: 5}} mode="contained"/>
+        style={{marginTop: 5, backgroundColor: '#10047c'}} mode="contained">Select Date and Time</Button>
+  
       <DatePicker
         modal
         open={open}
         date={date}
+        setHours={8}
+        minimumDate={new Date(date)}
+        maximumDate={new Date("2022-12-31")}
+        textColor="#10047c"
+        minuteInterval={10}
+        
         onConfirm={(date) => {setOpen(false) 
             setDate(date) 
             console.log(date) }}
         onCancel={() => {
           setOpen(false)
         }}
+      />
+      
 
-       
-      />    
+  
 
-            <Button icon="arrow-right-bold" style={{backgroundColor: '#10047c', marginTop: 25}} mode="contained" onPress={() => navigation.navigate('ShowInspectionPrice')}>
+            <Button icon="arrow-right-bold" style={{backgroundColor: '#10047c', marginTop: 25}} mode="contained" onPress={() => {
+              if(!date){Alert.alert("Plaese enter date")}
+              else if(!serviceDetailsEmail.trim()) {Alert.alert("Please enter email")}
+              else if(!serviceDetailsName.trim()) {Alert.alert("Plaese enetr the name")}
+              else if(!serviceDetailsPhone.trim()) {Alert.alert("Please enter phone number")}
+              else if(!serviceDetailsAddress.trim()) {Alert.alert("Please Enter complete address")}
+              else{navigation.navigate('ShowInspectionPrice', {
+                UserId: id, 
+                Field: field, 
+                problemStatement: ProblemStatement, 
+                Latitude: latitude, 
+                Longititude: longitude,
+                UstaadId:ustaadId,
+                Date:date,
+                Email: serviceDetailsEmail,
+                Name: serviceDetailsName,
+                Phone: serviceDetailsPhone,
+                Address: serviceDetailsAddress
+              })}
+            }}>
+
               Next
-            </Button>
-
-           
-            
+            </Button>   
         </View>           
   </View>
         </ScrollView>
-        
     )
 }
 

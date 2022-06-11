@@ -60,7 +60,8 @@ const [checked, setChecked] = React.useState(false);
         <Button icon="arrow-right-bold" style={{backgroundColor: '#10047c', marginTop: 20, marginBottom: 20}} mode="contained" onPress={() => {
               if (checked) {
                 navigation.navigate('ServiceDetailStep2', {Field: field, Id:id, ProblemStatement: problemDescription})}
-               else{createTwoButtonAlert()}}}>
+              else if (!problemDescription.trim()) {Alert.alert("Please enter problem statement")}
+              else{createTwoButtonAlert()}}}>
               Next
             </Button>
         </View>           
