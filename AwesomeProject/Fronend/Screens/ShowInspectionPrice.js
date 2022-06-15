@@ -1,13 +1,37 @@
 import React,{useState} from 'react'
 import { View, Text, Image} from 'react-native'
 import {Button} from 'react-native-paper';
-import { useNavigation } from '@react-navigation/native';
+// -+import { useNavigation } from '@react-navigation/native';
 
 
 
-export default function ShowInspectionPrice() {
-const navigation = useNavigation();
-const [text, setText] = useState('');
+export default function ShowInspectionPrice( { navigation, route } ) {
+
+  const {
+    UserId, 
+    Field, 
+    problemStatement, 
+    Latitude, 
+    Longititude, 
+    UstaadId, 
+    Date, 
+    Email, 
+    Name, 
+    Phone, 
+    Address } = route.params;
+
+    console.log(UserId, 
+      Field, 
+      problemStatement, 
+      Latitude, 
+      Longititude, 
+      UstaadId, 
+      Date, 
+      Email,
+      Name, 
+      Phone, 
+      Address)
+  
 
     return (
         <View style={{backgroundColor: '#10047c', flex: 1}}>
@@ -24,7 +48,19 @@ const [text, setText] = useState('');
 
 
             
-            <Button style={{backgroundColor: '#10047c', marginTop:60, width: '50%'}} mode="contained" onPress={() => navigation.navigate('PaymentSystem')}>
+            <Button style={{backgroundColor: '#10047c', marginTop:60, width: '50%'}} mode="contained" onPress={() => navigation.navigate('PaymentSystem', {
+              userId:UserId, 
+              field:Field, 
+              problemStatement:problemStatement, 
+              latitude:Latitude, 
+              longititude:Longititude, 
+              ustaadId:UstaadId, 
+              date:Date, 
+              email:Email, 
+              name:Name, 
+              phone:Phone, 
+              address:Address 
+            })}>
               Next
             </Button>           
             

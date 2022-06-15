@@ -4,11 +4,12 @@ const bcrypt = require('bcrypt');
 
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose');
-const { ObjectId } = require('mongodb');
 
 
 require('./Users')
+require('./Service')
 const Users = mongoose.model("Users")
+const Service = mongoose.model('Service')
 
 app.use(bodyParser.json())
 
@@ -35,7 +36,7 @@ app.get('/user-recodrs/:id', (req, res) => {
     })
     .catch(err => {
         res.send(err)
-    })
+    }) 
 })
 
 
@@ -119,6 +120,30 @@ app.post('/ustaadsignup', async(req, res) => {
         console.log(err)
     })
 })
+
+
+// avail service or hire ustaad
+app.post('/avail-service', async(req, res) => { 
+    const service = new Service({
+            userId, 
+            field, 
+            problemStatement, 
+            latitude, 
+            longititude, 
+            ustaadId, 
+            date, 
+            email, 
+            _name, 
+            phone, 
+            address} = req.body)
+            service.save()
+    .then(data=>{
+        console.log(data)
+    }).catch(err=>{
+        console.log(err)
+    })
+})
+
 
 //api find ustaad where role == ustaad
 app.get('/ustaadlist', async(req, res) => { 

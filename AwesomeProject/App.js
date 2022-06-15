@@ -91,6 +91,8 @@ const AuthStack = () => {
         <Stack.Screen name="LoginUser" component={Login} />
         <Stack.Screen name="LoginUstaad" component={LoginUstaad} />
         <Stack.Screen name="SignUp_User" component={SignUp_User} />
+        <Stack.Screen name="SuccessNotification" component={SuccessNotification} />
+
         <Stack.Screen name="signUp_User_Step_2" component={signUp_User_Step_2} />
         <Stack.Screen name="SuccessAccountCreation" component={SuccessAccountCreation} />
         <Stack.Screen name="SignUpUstaad" component={SignUpUstaad} />
