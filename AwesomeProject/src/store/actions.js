@@ -17,7 +17,7 @@ export const Init = () => {
 }
 
 
-let email = "" ,pass="";
+// let email = "" ,pass="";
 let status=false;
 
 export const Login = (username, password) => {

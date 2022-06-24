@@ -35,13 +35,14 @@ class Dashboard extends Component {
   }
  
   componentDidMount() {
-    const { navigation, route } = this.props;
+    const { route } = this.props;
  
     Geolocation.getCurrentPosition((info) => {
       lat = info.coords.latitude;
       long = info.coords.longitude;
       
       Id = route.params.Id;
+     
       Field = route.params.Field;
       ProblemStatement = route.params.ProblemStatement;
 

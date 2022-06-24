@@ -22,6 +22,7 @@ export default function ServiceDetail({route}) {
   const field = route.params.Field;
   const id = route.params.Id;
 
+
 const navigation = useNavigation();
 const [checked, setChecked] = React.useState(false);
 

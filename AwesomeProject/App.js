@@ -38,6 +38,7 @@ import SuccessNotification from "./Fronend/Screens/SuccessNotification";
 import Home from "./Fronend/Screens/Home";
 import UserProfile from "./Fronend/Screens/UserProfile";
 import UserNotification from "./Fronend/Screens/UserNotification";
+import SeeServiceDetails from "./Fronend/Screens/SeeServiceDetails";
 const Stack = createNativeStackNavigator();
 
 let user = "user";
@@ -80,6 +81,7 @@ const MyStack = () => {
         <Stack.Screen name="SuccessNotification" component={SuccessNotification} />
         <Stack.Screen name="UserProfile" component={UserProfile} />
         <Stack.Screen name="UserNotification" component={UserNotification} />
+        <Stack.Screen name="SeeServiceDetails" component={SeeServiceDetails} />
     </Stack.Navigator>
   );
 }

@@ -4,6 +4,7 @@ import { TextInput, Button, Avatar, IconButton, Colors, ActivityIndicator  } fro
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { parse } from '@babel/core';
+import { Item } from 'react-native-paper/lib/typescript/components/List/List';
 
 
 
@@ -11,34 +12,63 @@ export default function UserMainScreen({route}) {
     // console.log(route.params.hello)
 const navigation = useNavigation();
 const [data, setData] = useState([])
-const [newdata, setNewData] = useState([])
+const [serviceData, setServiceData] = useState([])
+const [newData, setNewData] = useState([])
 const [loading, setLoading] = useState(true)
 
 
-const fun = async() => {
-    const user = await AsyncStorage.getItem('user');
+// function timeFunction() {
+//     setTimeout(function(){ 
+//         let userId = "65654655155151656"; 
+//         fetch(`http://10.0.2.2:3000/service-recodes/${userId}`)
+//     .then((res) => res.json())
+//     .then (serviceData => {
+//         console.log(serviceData)
+//     setServiceData(serviceData)
+// })}, 5000);
+// }
+
+    
+
+async function fun () {
+    let user = await AsyncStorage.getItem('user');
+    let unique = null;
     setData(JSON.parse(user))
-    console.log(user,"hello")
-}
+
+    
+    let hello = JSON.parse(user)
+    let userId = hello.data._id;
+    let ustaadId = '';
+
+    fetch(`http://10.0.2.2:3000/service-recodes/${userId}`)
+            .then((res) => res.json())
+            .then (serviceData => {
+            setServiceData(serviceData)
+            serviceData.map((i, n) =>(
+                console.log(i.ustaadId)
+            ))
+        }) 
+    }
 
 
+     
+        //     const ustaadId = [...new Set(serviceData.map(item => item.ustaadId))];
+        //     console.log(ustaadId)
+        //     fetch(`http://10.0.2.2:3000/user-recodrs/${ustaadId}`)
+        //     .then((res) => res.json())
+        //     .then (newData => {
+        //         let pak = JSON.parse(newData)
+        //     setNewData(pak)
+        //  })
+    
+    
 
-useEffect(() => {
+useEffect(() => {     
     fun()
         if(data.length > 0){
             setLoading(false)
             console.log(data)
             }
-    
-  
-    // const id = {_id:data.data._id};
-    // fetch("http://10.0.2.2:3000/fetch", {method: "get", body: JSON.stringify(id)})
-    // .then(res=>res.json())
-    // .then(results => {
-    //     console.log(results)
-    //     setData(results)
-    //     setLoading(false)
-    // })
 },[])
 
 
@@ -55,6 +85,8 @@ useEffect(() => {
     }
     else{
         id = data.data._id;
+     
+
     return (
         <ScrollView>
         <View style={{backgroundColor: '#10047c', flex: 1}}>
@@ -74,34 +106,22 @@ useEffect(() => {
              Services
             </Button>
 
+          
+            <Text style={{color: '#10047c', fontSize: 35, marginTop: 35, fontWeight: 'bold'}}>Order(s) Details</Text>    
+              {serviceData.map((item, ndx)=>(
 
-            <Text style={{color: '#10047c', fontSize: 35, marginTop: 35, fontWeight: 'bold'}}>Order(s) Details</Text> 
+                <View key={ndx} style={{marginLeft: 10, marginTop: 25, flexDirection: 'row', alignItems: 'center', alignSelf: 'flex-start'}}>
+                    <Avatar.Image  size={50} source={require('../../src/assets/Login.png')} />
+                    <Text style={{padding: 8}}>Hello, {item._id}  {'\n'}{item.ustaadId}, <Text onPress={() => navigation.navigate("SeeServiceDetails", {Id: item._id})} style={{color: '#10047c', fontWeight: 'bold'}}>View Details</Text></Text>
+                </View>
 
-        <View style={{marginLeft: 10, marginTop: 25, flexDirection: 'row', alignItems: 'center', alignSelf: 'flex-start'}}>
-            <Avatar.Image  size={50} source={require('../../src/assets/Login.png')} />
-            <Text style={{padding: 8}}>Hello, Rizwan  {'\n'}Pakistan, <Text style={{color: '#10047c', fontWeight: 'bold'}}>View Details</Text></Text>
-        </View>
-
-        <View style={{marginLeft: 10, marginTop: 25, flexDirection: 'row', alignItems: 'center', alignSelf: 'flex-start'}}>
-            <Avatar.Image  size={50} source={require('../../src/assets/Login.png')} />
-            <Text style={{padding: 8}}>Hello, Rizwan  {'\n'}Pakistan, <Text style={{color: '#10047c', fontWeight: 'bold'}}>View Details</Text></Text>
-        </View> 
-
-        <View style={{marginLeft: 10, marginTop: 25, flexDirection: 'row', alignItems: 'center', alignSelf: 'flex-start'}}>
-            <Avatar.Image  size={50} source={require('../../src/assets/Login.png')} />
-            <Text style={{padding: 8}}>Hello, Rizwan  {'\n'}Pakistan, <Text style={{color: '#10047c', fontWeight: 'bold'}}>View Details</Text></Text>
-        </View>
-
-        <View style={{marginLeft: 10, marginTop: 25, flexDirection: 'row', alignItems: 'center', alignSelf: 'flex-start'}}>
-            <Avatar.Image  size={50} source={require('../../src/assets/Login.png')} />
-            <Text style={{padding: 8}}>Hello, Rizwan  {'\n'}Pakistan, <Text onPress={() => navigation.navigate("ViewDetailsUser")} style={{color: '#10047c', fontWeight: 'bold'}}>View Details</Text></Text>
-        </View>
+            ))}
 
         </View>           
   </View>
         </ScrollView>
         
     )}
-        
 }
+
 

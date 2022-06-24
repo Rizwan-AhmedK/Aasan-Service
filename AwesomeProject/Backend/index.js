@@ -30,7 +30,20 @@ mongoose.connection.on("error", (err) => {
 
 app.get('/user-recodrs/:id', (req, res) => {
     console.log(req.params.id)
-    Users.findById(req.params.id)
+    Users.find(req.params.id)
+    .then(data => {
+        res.send(data)
+    })
+    .catch(err => {
+        res.send(err)
+    }) 
+})
+
+
+//get service data bu user id
+app.get('/service-recodes/:userId', (req, res) => {
+    console.log(req.params.userId)
+    Service.find({userId: req.params.userId})
     .then(data => {
         res.send(data)
     })

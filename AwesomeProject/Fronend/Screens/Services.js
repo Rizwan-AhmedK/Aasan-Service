@@ -6,6 +6,7 @@ import { useNavigation } from '@react-navigation/native';
 
 export default function Services({route}) {
    const id =  route.params.Id;
+   console.log(id)
 const navigation = useNavigation();
 
     const [text, setText] = React.useState('');

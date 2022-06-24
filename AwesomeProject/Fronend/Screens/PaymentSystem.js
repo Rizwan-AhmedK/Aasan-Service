@@ -43,7 +43,7 @@ const insertServiceRecords = () => {
         })
     })
     .then(res=>res.json())
-    .then(data => {
+    .then(data => {0
         console.log(data)
     }).catch(err => {
         console.log(err)
