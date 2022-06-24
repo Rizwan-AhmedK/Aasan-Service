@@ -53,6 +53,31 @@ app.get('/service-recodes/:userId', (req, res) => {
 })
 
 
+
+//get service data by service id
+app.get('/service-recod/:userId', (req, res) => {
+    console.log(req.params.userId)
+    Service.findById(req.params.userId)
+    .then(data => {
+        res.send(data)
+    })
+    .catch(err => {
+        res.send(err)
+    }) 
+})
+
+
+//get service data by ustaad id
+app.get('/service-recod-ustaad/:Id', (req, res) => {
+    Users.findById(req.params.Id)
+    .then(data => {
+        res.send(data)
+    })
+    .catch(err => {
+        res.send(err)
+    }) 
+})
+
 app.post('/login', async(req , res) => {
     const {email, pass} =  req.body;
 

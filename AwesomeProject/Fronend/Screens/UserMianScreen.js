@@ -44,9 +44,9 @@ async function fun () {
             .then((res) => res.json())
             .then (serviceData => {
             setServiceData(serviceData)
-            serviceData.map((i, n) =>(
-                console.log(i.ustaadId)
-            ))
+            // serviceData.map((i, n) =>(
+            //     console.log(i.ustaadId)
+            // ))
         }) 
     }
 

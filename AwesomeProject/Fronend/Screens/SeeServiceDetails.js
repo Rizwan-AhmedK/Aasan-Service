@@ -6,17 +6,36 @@ import { Rating } from 'react-native-ratings';
 
 export default function UserMainScreen({route}) {
 const navigation = useNavigation();
+const [servicedata, setServiceData] = useState([])
+const [ustaaddata, setUstaadData] = useState([])
+const userId = route.params.Id;
 
-const Id = route.params.Id;
-console.log(Id)
 
+useEffect(() => {
+    fetch(`http://10.0.2.2:3000/service-recod/${userId}`)
+    .then((res) => res.json())
+    .then (serviceData => {
+    setServiceData(serviceData)
+}) 
+},[])
+
+const Id = servicedata.ustaadId;
+useEffect(() => {
+    fetch(`http://10.0.2.2:3000/service-recod-ustaad/${Id}`)
+    .then((res) => res.json())
+    .then (ustaadData => {
+    setUstaadData(ustaadData)
+}) 
+},[])
+
+console.log(ustaaddata.name)
 
     return (
         <ScrollView>
         <View style={{backgroundColor: '#10047c', flex: 1}}>
         <View style={{backgroundColor: '#10047c', flex: 1, alignItems: 'center', justifyContent: 'center', marginTop: 10}}> 
             <Avatar.Image  size={60} source={require('../../src/assets/Login.png')} />
-        <Text style={{color: "white", fontSize: 20, marginTop: 10, marginBottom: 10, textAlign: 'center'}}>{'\n'} <Text style={{fontSize: 15}}></Text></Text>
+        <Text style={{color: "white", fontSize: 20, marginTop: 10, marginBottom: 10, textAlign: 'center'}}>{'\n'} <Text style={{fontSize: 15}}></Text>{ustaaddata.name}</Text>
 
         </View>
 
