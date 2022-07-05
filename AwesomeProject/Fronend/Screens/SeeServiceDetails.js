@@ -9,40 +9,89 @@ const navigation = useNavigation();
 const [servicedata, setServiceData] = useState([])
 const [ustaaddata, setUstaadData] = useState([])
 const userId = route.params.Id;
+let Id = '';
 
 
 useEffect(() => {
-    fetch(`http://10.0.2.2:3000/service-recod/${userId}`)
-    .then((res) => res.json())
-    .then (serviceData => {
-    setServiceData(serviceData)
-}) 
-},[])
+    const fetchFirst = async () => {
+        const data = await fetch(`http://10.0.2.2:3000/service-recod/${userId}`)
+        // setting the new found data in a useState
+        const jsonData = await data.json()
+        setServiceData(jsonData);
+        console.log(jsonData, "servicedata")
+        return jsonData //--> return data value
+    }
+    const fetchSecond = async (data1) => {
+        console.log(data1, "data1")
+        const Id = data1.ustaadId;
+        console.log(Id,"id")
+       const data = await fetch(`http://10.0.2.2:3000/service-recod-ustaad/${Id}`)
+       const jsonData = await data.json()
+       console.log(jsonData, "data")
+        // setting the new found data in a useState
+        setUstaadData(jsonData)
+    }
+    fetchFirst().then(data => fetchSecond(data));
+    
+}, []);
 
-const Id = servicedata.ustaadId;
-useEffect(() => {
-    fetch(`http://10.0.2.2:3000/service-recod-ustaad/${Id}`)
-    .then((res) => res.json())
-    .then (ustaadData => {
-    setUstaadData(ustaadData)
-}) 
-},[])
 
-console.log(ustaaddata.name)
+
+
+
+
+
+
+
+
+
+
+// useEffect(() => {
+
+//     fetch(`http://10.0.2.2:3000/service-recod/${userId}`)
+//     .then((res) => res.json())
+//     .then (serviceData => {
+//     setServiceData(serviceData)
+
+    
+// });
+
+//     Id = servicedata.ustaadId;
+//     console.log(Id)
+
+//     fetch(`http://10.0.2.2:3000/service-recod-ustaad/${Id}`)
+//     .then((res) => res.json())
+//     .then (ustaadData => {
+//     setUstaadData(ustaadData)
+// }) 
+// })
+
+console.log(ustaaddata, "pakistan")
 
     return (
         <ScrollView>
         <View style={{backgroundColor: '#10047c', flex: 1}}>
         <View style={{backgroundColor: '#10047c', flex: 1, alignItems: 'center', justifyContent: 'center', marginTop: 10}}> 
             <Avatar.Image  size={60} source={require('../../src/assets/Login.png')} />
-        <Text style={{color: "white", fontSize: 20, marginTop: 10, marginBottom: 10, textAlign: 'center'}}>{'\n'} <Text style={{fontSize: 15}}></Text>{ustaaddata.name}</Text>
+        <Text style={{color: "white", fontSize: 20, marginTop: 10, marginBottom: 10, textAlign: 'center'}}>{'\n'} <Text style={{fontSize: 15}}></Text>{ustaaddata.name} {'\n'} {ustaaddata.field}</Text>
 
         </View>
 
+       
+
         <View style={{backgroundColor: 'white', alignItems: 'center', flex: 2.5, borderTopLeftRadius: 30, borderTopRightRadius: 30}}>
-        <Button style={{marginTop: 50, backgroundColor: '#10047c', paddingLeft: 5, paddingRight: 5}} mode="contained" onPress={() => navigation.navigate('EnterDetails')}>
-             Hire Now
-            </Button>
+        <Text>Your Ustaad will be there by {'\n'}Date and Time</Text>
+        <Button style={{marginTop: 50, backgroundColor: 'green', paddingLeft: 5, paddingRight: 5}} mode="contained" onPress={() => navigation.navigate('EnterDetails')}>
+            Work completed
+        </Button>
+
+        <Button style={{marginTop: 20, backgroundColor: '#10047c', paddingLeft: 5, paddingRight: 5}} mode="contained" onPress={() => navigation.navigate('EnterDetails')}>
+            Add More Work
+        </Button>
+
+        <Button style={{marginTop: 20, backgroundColor: 'red', paddingLeft: 5, paddingRight: 5}} mode="contained" onPress={() => navigation.navigate('EnterDetails')}>
+            File a Complain 
+        </Button>
 
 
             {/* <Text style={{fontSize: 20}}>{'\n'}About Me</Text>
