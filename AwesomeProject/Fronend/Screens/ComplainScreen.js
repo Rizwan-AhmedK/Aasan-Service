@@ -1,5 +1,5 @@
-import React,{useState, useEffect} from 'react'
-import { View, Text, Image, ScrollView} from 'react-native'
+import React,{useState, useEffect} from 'react';
+import { View, Text, Image, ScrollView} from 'react-native';
 import {Button, Avatar, TextInput} from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 
@@ -9,7 +9,9 @@ import { useNavigation } from '@react-navigation/native';
 
 
 
-export default function ComplainScreen() {
+export default function ComplainScreen({route}) {
+    console.log(route.params.ustaadID);
+    console.log(route.params.userID);
 const navigation = useNavigation();
 const [text, setText] = useState('');
 

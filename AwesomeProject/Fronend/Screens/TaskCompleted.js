@@ -7,7 +7,9 @@ import { Rating } from 'react-native-ratings';
 
 
 
-export default function UstaadConfirmation() {
+export default function UstaadConfirmation({route}) {
+    console.log(route.params.ustaadID);
+    console.log(route.params.userID);
 const navigation = useNavigation();
 const [text, setText] = useState('');
 

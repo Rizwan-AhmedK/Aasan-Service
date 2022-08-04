@@ -4,7 +4,9 @@ import { TextInput, Button} from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 
 
-export default function AddMoreWorkScreen() {
+export default function AddMoreWorkScreen({route}) {
+    console.log(route.params.ustaadID);
+    console.log(route.params.userID);
 const navigation = useNavigation();
 
     const [text, setText] = React.useState('');

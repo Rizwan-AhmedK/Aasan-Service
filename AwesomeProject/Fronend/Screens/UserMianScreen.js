@@ -5,6 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { parse } from '@babel/core';
 import { Item } from 'react-native-paper/lib/typescript/components/List/List';
+import { FAB } from 'react-native-paper';
 
 
 
@@ -105,8 +106,6 @@ useEffect(() => {
         <Button style={{marginTop: 50, backgroundColor: '#10047c', paddingLeft: 5, paddingRight: 5}} mode="contained" onPress={() => navigation.navigate('Services',{Id:id})}>
              Services
             </Button>
-
-          
             <Text style={{color: '#10047c', fontSize: 35, marginTop: 35, fontWeight: 'bold'}}>Order(s) Details</Text>    
               {serviceData.map((item, ndx)=>(
 
@@ -114,10 +113,16 @@ useEffect(() => {
                     <Avatar.Image  size={50} source={require('../../src/assets/Login.png')} />
                     <Text style={{padding: 8}}>Hello, {item._id}  {'\n'}{item.ustaadId}, <Text onPress={() => navigation.navigate("SeeServiceDetails", {Id: item._id})} style={{color: '#10047c', fontWeight: 'bold'}}>View Details</Text></Text>
                 </View>
-
             ))}
-
-        </View>           
+        </View>
+        <FAB
+    icon="plus"
+    style={{position: 'absolute',
+    margin: 16,
+    right: 0,
+    bottom: 0,}}
+    onPress={() => console.log('Pressed')}
+  />           
   </View>
         </ScrollView>
         

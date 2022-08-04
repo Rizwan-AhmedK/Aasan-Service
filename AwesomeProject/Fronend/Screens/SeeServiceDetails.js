@@ -73,23 +73,24 @@ console.log(ustaaddata, "pakistan")
         <View style={{backgroundColor: '#10047c', flex: 1}}>
         <View style={{backgroundColor: '#10047c', flex: 1, alignItems: 'center', justifyContent: 'center', marginTop: 10}}> 
             <Avatar.Image  size={60} source={require('../../src/assets/Login.png')} />
-        <Text style={{color: "white", fontSize: 20, marginTop: 10, marginBottom: 10, textAlign: 'center'}}>{'\n'} <Text style={{fontSize: 15}}></Text>{ustaaddata.name} {'\n'} {ustaaddata.field}</Text>
+        <Text style={{color: "white", fontSize: 20, marginTop: 10, marginBottom: 10, textAlign: 'center'}}>{'\n'} <Text style={{fontSize: 15}}></Text>{ustaaddata.name} {'\n'} {ustaaddata.field}{'\n'}{ustaaddata.phone}</Text>
 
         </View>
 
        
 
         <View style={{backgroundColor: 'white', alignItems: 'center', flex: 2.5, borderTopLeftRadius: 30, borderTopRightRadius: 30}}>
-        <Text>Your Ustaad will be there by {'\n'}Date and Time</Text>
-        <Button style={{marginTop: 50, backgroundColor: 'green', paddingLeft: 5, paddingRight: 5}} mode="contained" onPress={() => navigation.navigate('EnterDetails')}>
+        <Text style={{textAlign: "center", marginTop: 30, fontSize: 25}}>Your Ustaad will be there by {'\n'}<Text style={{marginTop: 40}}>Date and Time{'\n\n\n\n'}<Text style={{fontSize: 25, fontWeight: 'bold'}}>{servicedata.date}</Text></Text></Text>
+        
+        <Button style={{marginTop: 70, backgroundColor: 'green', paddingLeft: 5, paddingRight: 5}} mode="contained" onPress={() => navigation.navigate('TaskCompleted', {userID: servicedata.userId, ustaadID: servicedata.ustaadId})}>
             Work completed
         </Button>
 
-        <Button style={{marginTop: 20, backgroundColor: '#10047c', paddingLeft: 5, paddingRight: 5}} mode="contained" onPress={() => navigation.navigate('EnterDetails')}>
+        <Button style={{marginTop: 20, backgroundColor: '#10047c', paddingLeft: 5, paddingRight: 5}} mode="contained" onPress={() => navigation.navigate('AddMoreWorkScreen', {userID: servicedata.userId, ustaadID: servicedata.ustaadId})}>
             Add More Work
         </Button>
 
-        <Button style={{marginTop: 20, backgroundColor: 'red', paddingLeft: 5, paddingRight: 5}} mode="contained" onPress={() => navigation.navigate('EnterDetails')}>
+        <Button style={{marginTop: 20, marginBottom: 35, backgroundColor: 'red', paddingLeft: 5, paddingRight: 5}} mode="contained" onPress={() => navigation.navigate('ComplainScreen', {userID: servicedata.userId, ustaadID: servicedata.ustaadId})}>
             File a Complain 
         </Button>
 
