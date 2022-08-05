@@ -96,9 +96,9 @@ useEffect(() => {
         <Text style={{color: "white", fontSize: 20, marginTop: 10, marginBottom: 10, textAlign: 'center'}}>{data.data.name}{'\n'} <Text style={{fontSize: 15}}>User</Text></Text>
 
         <View style={{flex: 1, flexDirection: 'row', alignContent: 'center', alignItems: 'center'}}>
-            <IconButton icon="cog" color='white' size={20} onPress={() => console.log('Pressed')} />
-            <IconButton icon="bell" color='white' size={20} onPress={()=>navigation.navigate("UserNotification")}/>
-            <IconButton icon="account" color='white' size={20} onPress={()=> navigation.navigate("UserProfile")} />
+            <IconButton icon="cog" color='white' size={20} onPress={()=>navigation.navigate("UserSettings",{Id:id})} />
+            <IconButton icon="bell" color='white' size={20} onPress={()=>navigation.navigate("UserNotification",{Id:id})}/>
+            <IconButton icon="account" color='white' size={20} onPress={()=> navigation.navigate("UserProfile",{Id:id})} />
         </View>
         </View>
 

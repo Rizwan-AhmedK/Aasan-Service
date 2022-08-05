@@ -39,6 +39,7 @@ import Home from "./Fronend/Screens/Home";
 import UserProfile from "./Fronend/Screens/UserProfile";
 import UserNotification from "./Fronend/Screens/UserNotification";
 import SeeServiceDetails from "./Fronend/Screens/SeeServiceDetails";
+import UserSettings from "./Fronend/Screens/UserSettings";
 const Stack = createNativeStackNavigator();
 
 let user = "user";
@@ -63,6 +64,7 @@ const MyStack = () => {
 
         <Stack.Screen name="ForgetPassword" component={ForgetPassword} />
         <Stack.Screen name="Services" component={Services} />
+        <Stack.Screen name="UserSettings" component={UserSettings} />
         <Stack.Screen name="ViewDetailsUser" component={ViewDetailsUser} />
         <Stack.Screen name="ViewDetailsUstaad" component={ViewDetailsUstaad} />
         <Stack.Screen name="ServiceDetail" component={ServiceDetail} />

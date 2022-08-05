@@ -6,7 +6,8 @@ import { useDispatch } from 'react-redux';
 import { Logout } from '../../src/store/actions';
 
 
-export default function UserMainScreen() {
+export default function UserMainScreen({route}) {
+    console.log(route.params.Id);
 const navigation = useNavigation();
 const dispatch = useDispatch();
 const submit = () => {

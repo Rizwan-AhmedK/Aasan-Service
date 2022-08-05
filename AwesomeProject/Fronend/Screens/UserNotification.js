@@ -5,7 +5,8 @@ import { useNavigation } from '@react-navigation/native';
 
 
 
-export default function UserNotification() {
+export default function UserNotification({route}) {
+    console.log(route.params.Id);
 const navigation = useNavigation();
 
 
