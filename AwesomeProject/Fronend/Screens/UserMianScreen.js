@@ -3,8 +3,6 @@ import { View, Text, Image, StyleSheet, ScrollView} from 'react-native'
 import { TextInput, Button, Avatar, IconButton, Colors, ActivityIndicator  } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { parse } from '@babel/core';
-import { Item } from 'react-native-paper/lib/typescript/components/List/List';
 import { FAB } from 'react-native-paper';
 
 
@@ -39,6 +37,7 @@ async function fun () {
     
     let hello = JSON.parse(user)
     let userId = hello.data._id;
+    let role = hello.data.role;
     let ustaadId = '';
 
     fetch(`http://10.0.2.2:3000/service-recodes/${userId}`)
@@ -101,9 +100,9 @@ useEffect(() => {
             <IconButton icon="account" color='white' size={20} onPress={()=> navigation.navigate("UserProfile",{Id:id})} />
         </View>
         </View>
-
         <View style={{backgroundColor: 'white', alignItems: 'center', flex: 2.5, borderTopLeftRadius: 30, borderTopRightRadius: 30}}>
         <Button style={{marginTop: 50, backgroundColor: '#10047c', paddingLeft: 5, paddingRight: 5}} mode="contained" onPress={() => navigation.navigate('Services',{Id:id})}>
+    
              Services
             </Button>
             <Text style={{color: '#10047c', fontSize: 35, marginTop: 35, fontWeight: 'bold'}}>Order(s) Details</Text>    

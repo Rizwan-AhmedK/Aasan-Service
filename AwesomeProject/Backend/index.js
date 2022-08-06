@@ -8,8 +8,14 @@ const mongoose = require('mongoose');
 
 require('./Users')
 require('./Service')
+require('./Complain')
+require('./Ratting')
+require('./AddMoreWork')
 const Users = mongoose.model("Users")
 const Service = mongoose.model('Service')
+const Complain = mongoose.model('Complain')
+const Ratting = mongoose.model('Ratting')
+const AddMoreWork = mongoose.model('AddMoreWork')
 
 app.use(bodyParser.json())
 
@@ -28,6 +34,64 @@ mongoose.connection.on("error", (err) => {
     console.log("error while connecting", err)
 })
 
+
+//complain data
+app.post('/complain', async(req, res) => { 
+    const complain = new Complain({
+        complainby:req.body.complainby,
+        complainfor:req.body.complainfor,
+        complain:req.body.complain,
+    })
+    complain.save()
+    .then(data=>{
+        console.log(data)
+        res.send("saved")
+    }).catch(err=>{
+        console.log(err)
+    })
+}
+)
+
+
+//Ratting data
+app.post('/ratting', async(req, res) => { 
+    const ratting = new Ratting({
+        rattingby:req.body.rattingby,
+        rattingfor:req.body.rattingfor,
+        ratting:req.body.ratting,
+        rattingcomment:req.body.rattingcomment,
+    })
+
+    ratting.save()
+    .then(data=>{
+        console.log(data)
+        res.send("saved")
+    }).catch(err=>{
+        console.log(err)
+    })
+}
+)
+
+
+//AddMoreWork data
+app.post('/addmorework', async(req, res) => { 
+    const addmorework = new AddMoreWork({
+        workaddedby:req.body.workaddedby,
+        workaddedfor:req.body.workaddedfor,
+        workdetails:req.body.workdetails,
+        workamount:req.body.workamount,
+    })
+    
+    addmorework.save()
+    .then(data=>{
+        console.log(data)
+        res.send("saved")
+    }).catch(err=>{
+        console.log(err)
+    })
+}
+)
+
 app.get('/user-recodrs/:id', (req, res) => {
     console.log(req.params.id)
     Users.find(req.params.id)
@@ -44,6 +108,18 @@ app.get('/user-recodrs/:id', (req, res) => {
 app.get('/service-recodes/:userId', (req, res) => {
     console.log(req.params.userId)
     Service.find({userId: req.params.userId})
+    .then(data => {
+        res.send(data)
+    })
+    .catch(err => {
+        res.send(err)
+    }) 
+})
+
+//get service data bu ustaad id
+app.get('/service-recodes-ustaad/:ustaadId', (req, res) => {
+    console.log(req.params.ustaadId)
+    Service.find({ustaadId: req.params.ustaadId})
     .then(data => {
         res.send(data)
     })

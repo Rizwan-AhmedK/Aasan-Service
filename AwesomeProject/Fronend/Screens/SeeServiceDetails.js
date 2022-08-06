@@ -86,11 +86,11 @@ console.log(ustaaddata, "pakistan")
             Work completed
         </Button>
 
-        <Button style={{marginTop: 20, backgroundColor: '#10047c', paddingLeft: 5, paddingRight: 5}} mode="contained" onPress={() => navigation.navigate('AddMoreWorkScreen', {userID: servicedata.userId, ustaadID: servicedata.ustaadId})}>
+        {/* <Button style={{marginTop: 20, backgroundColor: '#10047c', paddingLeft: 5, paddingRight: 5}} mode="contained" onPress={() => navigation.navigate('AddMoreWorkScreen', {userID: servicedata.userId, ustaadID: servicedata.ustaadId})}>
             Add More Work
-        </Button>
+        </Button> */}
 
-        <Button style={{marginTop: 20, marginBottom: 35, backgroundColor: 'red', paddingLeft: 5, paddingRight: 5}} mode="contained" onPress={() => navigation.navigate('ComplainScreen', {userID: servicedata.userId, ustaadID: servicedata.ustaadId})}>
+        <Button style={{marginTop: 20, marginBottom: 95, backgroundColor: 'red', paddingLeft: 9, paddingRight: 9}} mode="contained" onPress={() => navigation.navigate('ComplainScreen', {userID: servicedata.userId, ustaadID: servicedata.ustaadId})}>
             File a Complain 
         </Button>
 
