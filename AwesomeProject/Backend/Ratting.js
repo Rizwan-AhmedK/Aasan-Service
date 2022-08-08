@@ -4,7 +4,7 @@ const RattingSchema = new mongoose.Schema({
     rattingby: String,
     rattingfor: String,
     ratting: Number,
-    rattingcomment: String
+    rattingComment: String
 })
 mongoose.model("Ratting", RattingSchema);
 

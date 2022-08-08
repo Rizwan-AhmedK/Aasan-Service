@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { View, Text, Image, StyleSheet, ScrollView, Alert} from 'react-native'
+import { View, Text, Image, StyleSheet, ScrollView} from 'react-native'
 import { TextInput, Button, Avatar, IconButton, Colors, ActivityIndicator  } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -28,7 +28,7 @@ const [loading, setLoading] = useState(true)
 // }
 
     
-let role = ""
+
 async function fun () {
     let user = await AsyncStorage.getItem('user');
     let unique = null;
@@ -37,7 +37,7 @@ async function fun () {
     
     let hello = JSON.parse(user)
     let ustaadId = hello.data._id;
-    role = hello.data.role;
+
     fetch(`http://10.0.2.2:3000/service-recodes-ustaad/${ustaadId}`)
             .then((res) => res.json())
             .then (serviceData => {
@@ -93,22 +93,23 @@ useEffect(() => {
         <Text style={{color: "white", fontSize: 20, marginTop: 10, marginBottom: 10, textAlign: 'center'}}>{data.data.name}{'\n'} <Text style={{fontSize: 15}}>{data.data.role}</Text></Text>
 
         <View style={{flex: 1, flexDirection: 'row', alignContent: 'center', alignItems: 'center'}}>
-            <IconButton icon="cog" color='white' size={20} onPress={()=>navigation.navigate("UserSettings",{Id:id})} />
-            <IconButton icon="bell" color='white' size={20} onPress={()=>navigation.navigate("UserNotification",{Id:id})}/>
-            <IconButton icon="account" color='white' size={20} onPress={()=> navigation.navigate("UserProfile",{Id:id})} />
+            <IconButton icon="cog" color='white' size={20} onPress={()=>navigation.navigate("UserSettings",{Id:id, userData: [data]})} />
+            <IconButton icon="bell" color='white' size={20} onPress={()=>navigation.navigate("UserNotification",{Id:id, userData: [data]})}/>
+            <IconButton icon="account" color='white' size={20} onPress={()=> navigation.navigate("UserProfile",{Id:id, userData: [data]})} />
         </View>
         </View>
         <View style={{backgroundColor: 'white', alignItems: 'center', flex: 2.5, borderTopLeftRadius: 30, borderTopRightRadius: 30}}>
-        <Text style={{color: '#10047c', fontSize: 35, marginTop: 35, fontWeight: 'bold'}}>Total Earning</Text>    
-        <Text style={{color: '#10047c', fontSize: 25, marginTop: 35, fontWeight: 'bold'}}>Rs. 5000</Text>    
 
-  
+        <Text style={{color: '#10047c', fontSize: 35, marginTop: 35, fontWeight: 'bold'}}>Earning</Text>    
+        <Text style={{color: '#10047c', fontSize: 20, marginTop: 35, fontWeight: 'bold'}}>Rs. 5099</Text>    
+
+
             <Text style={{color: '#10047c', fontSize: 35, marginTop: 35, fontWeight: 'bold'}}>Order(s) Details</Text>    
               {serviceData.map((item, ndx)=>(
 
                 <View key={ndx} style={{marginLeft: 10, marginTop: 25, flexDirection: 'row', alignItems: 'center', alignSelf: 'flex-start'}}>
                     <Avatar.Image  size={50} source={require('../../src/assets/Login.png')} />
-                    <Text style={{padding: 8}}>Hello, {item._id}  {'\n'}{item.ustaadId}, <Text onPress={() => navigation.navigate("SeeServiceDetails", {Id: item._id})} style={{color: '#10047c', fontWeight: 'bold'}}>View Details</Text></Text>
+                    <Text style={{padding: 8}}>Hello, {item._id}  {'\n'}{item.ustaadId}, <Text onPress={() => navigation.navigate("SeeServiceDetailsUstaad", {Id: item._id})} style={{color: '#10047c', fontWeight: 'bold'}}>View Details</Text></Text>
                 </View>
             ))}
         </View>
@@ -125,3 +126,5 @@ useEffect(() => {
         
     )}
 }
+
+

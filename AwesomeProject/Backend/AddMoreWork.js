@@ -3,8 +3,8 @@ const mongoose = require("mongoose");
 const AddMoreWorkSchema = new mongoose.Schema({
     workaddedby: String,
     workaddedfor: String,
-    workdetails: String,
-    workamount: Number,
+    workDetails: String,
+    workAmount: Number,
 })
 mongoose.model("AddMoreWork", AddMoreWorkSchema);
 

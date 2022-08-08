@@ -7,6 +7,8 @@ import { useNavigation } from '@react-navigation/native';
 
 export default function UserSettings({route}) {
     console.log(route.params.Id);
+    const data = route.params.userData;
+
 const navigation = useNavigation();
 
 

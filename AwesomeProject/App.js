@@ -40,6 +40,8 @@ import UserProfile from "./Fronend/Screens/UserProfile";
 import UserNotification from "./Fronend/Screens/UserNotification";
 import SeeServiceDetails from "./Fronend/Screens/SeeServiceDetails";
 import UserSettings from "./Fronend/Screens/UserSettings";
+import SeeServiceDetailsUstaad from "./Fronend/Screens/SeeServiceDetailsUstaad";
+
 const Stack = createNativeStackNavigator();
 
 let user = "user";
@@ -68,6 +70,7 @@ const MyStack = () => {
         <Stack.Screen name="ViewDetailsUser" component={ViewDetailsUser} />
         <Stack.Screen name="ViewDetailsUstaad" component={ViewDetailsUstaad} />
         <Stack.Screen name="ServiceDetail" component={ServiceDetail} />
+        <Stack.Screen name="SeeServiceDetailsUstaad" component={SeeServiceDetailsUstaad} />
         <Stack.Screen name="ServiceDetailStep2" component={ServiceDetailStep2} />
         <Stack.Screen name="ServiceDetailStep3" component={ServiceDetailStep3} />
         <Stack.Screen name="SeeUstaadProfile" component={SeeUstaadProfile} />
@@ -82,6 +85,7 @@ const MyStack = () => {
         <Stack.Screen name="AddMoreWorkScreen" component={AddMoreWorkScreen} />
         <Stack.Screen name="SuccessNotification" component={SuccessNotification} />
         <Stack.Screen name="UserProfile" component={UserProfile} />
+
         <Stack.Screen name="UserNotification" component={UserNotification} />
         <Stack.Screen name="SeeServiceDetails" component={SeeServiceDetails} />
     </Stack.Navigator>

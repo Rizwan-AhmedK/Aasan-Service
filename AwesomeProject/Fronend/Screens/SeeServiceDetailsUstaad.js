@@ -23,7 +23,7 @@ useEffect(() => {
     }
     const fetchSecond = async (data1) => {
         console.log(data1, "data1")
-        const Id = data1.ustaadId;
+        const Id = data1.userId;
         console.log(Id,"id")
        const data = await fetch(`http://10.0.2.2:3000/service-recod-ustaad/${Id}`)
        const jsonData = await data.json()
@@ -73,24 +73,25 @@ console.log(ustaaddata, "pakistan")
         <View style={{backgroundColor: '#10047c', flex: 1}}>
         <View style={{backgroundColor: '#10047c', flex: 1, alignItems: 'center', justifyContent: 'center', marginTop: 10}}> 
             <Avatar.Image  size={60} source={require('../../src/assets/Login.png')} />
-        <Text style={{color: "white", fontSize: 20, marginTop: 10, marginBottom: 10, textAlign: 'center'}}>{'\n'} <Text style={{fontSize: 15}}></Text>{ustaaddata.name} {'\n'} {ustaaddata.field}{'\n'}{ustaaddata.phone}</Text>
+        <Text style={{color: "white", fontSize: 20, marginTop: 10, marginBottom: 10, textAlign: 'center'}}>{'\n'} <Text style={{fontSize: 15}}></Text>{ustaaddata.name} {'\n'} {ustaaddata.role}</Text>
 
         </View>
 
        
 
         <View style={{backgroundColor: 'white', alignItems: 'center', flex: 2.5, borderTopLeftRadius: 30, borderTopRightRadius: 30}}>
-        <Text style={{textAlign: "center", marginTop: 30, fontSize: 25}}>Your Ustaad will be there by {'\n'}<Text style={{marginTop: 40}}>Date and Time{'\n\n\n\n'}<Text style={{fontSize: 25, fontWeight: 'bold'}}>{servicedata.date}</Text></Text></Text>
+        <Text style={{textAlign: "center", marginTop: 30, fontSize: 25, fontWeight: 'bold'}}>Your task is at the given location {'\n'}<Text style={{marginTop: 40, fontWeight: 'normal'}}>Latitude: {servicedata.latitude}{'\n'}Longitude: {servicedata.longititude}</Text></Text>
+        <Text style={{textAlign: "center", marginTop: 30, fontSize: 25, fontWeight: 'bold'}}>On the following Date and Time {'\n'}<Text style={{marginTop: 40, fontWeight: 'normal'}}>{servicedata.date}</Text></Text>
         
-        <Button style={{marginTop: 70, backgroundColor: 'green', paddingLeft: 5, paddingRight: 5}} mode="contained" onPress={() => navigation.navigate('TaskCompleted', {userID: servicedata.userId, ustaadID: servicedata.ustaadId, Role: 'user'})}>
+        <Button style={{marginTop: 70, backgroundColor: 'green', paddingLeft: 5, paddingRight: 5}} mode="contained" onPress={() => navigation.navigate('TaskCompleted', {userID: servicedata.userId, ustaadID: servicedata.ustaadId, Role: 'ustaad'})}>
             Work completed
         </Button>
 
-        {/* <Button style={{marginTop: 20, backgroundColor: '#10047c', paddingLeft: 5, paddingRight: 5}} mode="contained" onPress={() => navigation.navigate('AddMoreWorkScreen', {userID: servicedata.userId, ustaadID: servicedata.ustaadId})}>
+        <Button style={{marginTop: 20, backgroundColor: '#10047c', paddingLeft: 5, paddingRight: 5}} mode="contained" onPress={() => navigation.navigate('AddMoreWorkScreen', {userID: servicedata.userId, ustaadID: servicedata.ustaadId, Role: 'ustaad'})}>
             Add More Work
-        </Button> */}
+        </Button>
 
-        <Button style={{marginTop: 20, marginBottom: 95, backgroundColor: 'red', paddingLeft: 9, paddingRight: 9}} mode="contained" onPress={() => navigation.navigate('ComplainScreen', {userID: servicedata.userId, ustaadID: servicedata.ustaadId, Role: 'user'})}>
+        <Button style={{marginTop: 20, marginBottom: 35, backgroundColor: 'red', paddingLeft: 9, paddingRight: 9}} mode="contained" onPress={() => navigation.navigate('ComplainScreen', {userID: servicedata.userId, ustaadID: servicedata.ustaadId, Role: 'ustaad'})}>
             File a Complain 
         </Button>
 

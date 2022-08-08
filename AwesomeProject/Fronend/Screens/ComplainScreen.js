@@ -1,5 +1,5 @@
 import React,{useState, useEffect} from 'react';
-import { View, Text, Image, ScrollView} from 'react-native';
+import { View, Text, Image, ScrollView, Alert} from 'react-native';
 import {Button, Avatar, TextInput} from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 
@@ -10,10 +10,57 @@ import { useNavigation } from '@react-navigation/native';
 
 
 export default function ComplainScreen({route}) {
-    console.log(route.params.ustaadID);
-    console.log(route.params.userID);
-const navigation = useNavigation();
-const [text, setText] = useState('');
+    const navigation = useNavigation();
+    let complainfor, complainby;
+    const Role = route.params.Role;
+    if(Role == 'user'){
+        complainfor = route.params.ustaadID;
+        complainby = route.params.userID;}
+    else{
+        complainby = route.params.ustaadID;
+        complainfor = route.params.userID;
+    }
+    const [complain, setComplain] = useState('');
+
+    const showAlert = () => {
+        Alert.alert(
+          "Your Complain has been registered. our team will contact you soon.",
+          "",
+          [
+            { text: "OK", onPress: () => {
+                if(Role == 'user'){
+                    navigation.navigate("UserMainScreen")}
+                else{navigation.navigate("UstaadMainScreen")}
+            }  
+        }
+          ]
+        )
+      }
+
+const submitData = () => {
+    fetch("http://10.0.2.2:3000/complain", {
+        method : "post",
+        headers:{
+            'Content-Type': 'application/json' 
+        },
+        body:JSON.stringify({
+            complainfor,
+            complainby,
+            complain,
+        })
+    })
+    
+    .then(res=>res.json())
+    .then(data => {
+      console.log(data)
+        
+    }).catch(err => {
+        console.log(err)
+    })
+  
+    showAlert()
+   
+  }
 
 
 
@@ -32,6 +79,8 @@ const [text, setText] = useState('');
 
         <Text style={{fontSize: 15, marginTop: 60, textAlign: 'center', fontWeight: 'bold', padding: 10}}>Enter all neccesary details related to the problem</Text>
         <TextInput style={{width: 350, marginTop: 10, height: 200}}
+            value = {complain}
+            onChangeText = {setComplain}
             label="Your complain here"
             mode='outlined'
             multiline
@@ -40,7 +89,7 @@ const [text, setText] = useState('');
 
         
             
-        <Button style={{backgroundColor: '#10047c', marginTop:60, width: '50%', marginBottom: 35}} mode="contained" onPress={() => navigation.navigate("Home")}>
+        <Button style={{backgroundColor: '#10047c', marginTop:60, width: '50%', marginBottom: 35}} mode="contained" onPress={submitData}>
               Submit
             </Button>   
         

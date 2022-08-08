@@ -59,7 +59,7 @@ app.post('/ratting', async(req, res) => {
         rattingby:req.body.rattingby,
         rattingfor:req.body.rattingfor,
         ratting:req.body.ratting,
-        rattingcomment:req.body.rattingcomment,
+        rattingComment:req.body.rattingComment,
     })
 
     ratting.save()
@@ -78,8 +78,8 @@ app.post('/addmorework', async(req, res) => {
     const addmorework = new AddMoreWork({
         workaddedby:req.body.workaddedby,
         workaddedfor:req.body.workaddedfor,
-        workdetails:req.body.workdetails,
-        workamount:req.body.workamount,
+        workDetails:req.body.workDetails,
+        workAmount:req.body.workAmount,
     })
     
     addmorework.save()
@@ -127,6 +127,19 @@ app.get('/service-recodes-ustaad/:ustaadId', (req, res) => {
         res.send(err)
     }) 
 })
+
+
+// //get service data bu user id
+// app.get('/service-recodes-user/:userId', (req, res) => {
+//     console.log(req.params.userId)
+//     Service.find({userId: req.params.userId})
+//     .then(data => {
+//         res.send(data)
+//     })
+//     .catch(err => {
+//         res.send(err)
+//     }) 
+// })
 
 
 
