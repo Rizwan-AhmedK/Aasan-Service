@@ -10,17 +10,26 @@ import { Rating } from 'react-native-ratings';
 export default function UstaadConfirmation({route}) {
     const navigation = useNavigation();
     const Role = route.params.Role;
-    let rattingfor, rattingby;
+    let fors, by;
     if(Role == 'user'){
-        rattingfor = route.params.ustaadID;
-        rattingby = route.params.userID;}
+        fors = route.params.ustaadID;
+        console.log(fors, "fors")
+        by = route.params.userID;
+        console.log(by, 'by')
+    }
     else{
-        rattingby = route.params.ustaadID;
-        rattingfor = route.params.userID;
+        by = route.params.ustaadID;
+        fors = route.params.userID;
+        console.log(fors, "fors")
+        console.log(by, 'by')
+
+
     }
     
     const [ratting, setRatting] = useState(0);
     const [rattingComment, setrattingComment] = useState('');
+    const title = "Ratting Notification";
+    const message = "Ratting is given by " + Role;
 
 
 const showAlert = () => {
@@ -39,17 +48,30 @@ const showAlert = () => {
   }
 
 const submitData = () => {
-fetch("http://10.0.2.2:3000/ratting", {
+fetch("http://localhost:3000/ratting", {
     method : "post",
     headers:{
         'Content-Type': 'application/json' 
     },
     body:JSON.stringify({
-        rattingby,
-        rattingfor,
+        by,
+        fors,
         ratting,
-        rattingComment
+        rattingComment,
+    })
+})
 
+
+fetch("http://localhost:3000/temp", {
+    method : "post",
+    headers:{
+        'Content-Type': 'application/json' 
+    },
+    body:JSON.stringify({
+        title,
+        message,
+        by,
+        fors
     })
 })
 

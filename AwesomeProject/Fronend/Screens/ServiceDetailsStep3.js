@@ -6,7 +6,7 @@ import { useNavigation } from '@react-navigation/native';
 import { Rating } from 'react-native-ratings';
 
 export default function Services({route}) {
-
+    
     const id = route.params.Id
     const field = route.params.Field
     const problemStatement = route.params.ProblemStatement
@@ -18,7 +18,7 @@ const [data, setData] = useState([])
 const [loading, setloading] = useState(false)
 
 useEffect(()=>{
-    fetch("http://10.0.2.2:3000/ustaadlist")
+    fetch("http://localhost:3000/ustaadlist")
     .then((res) => res.json())
     .then((data) => {
         setData(data)

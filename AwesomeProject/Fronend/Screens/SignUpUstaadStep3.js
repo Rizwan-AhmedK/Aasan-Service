@@ -51,7 +51,7 @@ const showAlert = () => {
 
 
 const submitData = () => {
-  fetch("http://10.0.2.2:3000/ustaadsignup", {
+  fetch("http://localhost:3000/ustaadsignup", {
       method : "post",
       headers:{
           'Content-Type': 'application/json' 

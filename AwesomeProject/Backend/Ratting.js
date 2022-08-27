@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 
 const RattingSchema = new mongoose.Schema({
-    rattingby: String,
-    rattingfor: String,
+    by: String,
+    fors: String,
     ratting: Number,
     rattingComment: String
 })

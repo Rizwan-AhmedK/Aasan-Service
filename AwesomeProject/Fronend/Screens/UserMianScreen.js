@@ -40,7 +40,7 @@ async function fun () {
     let role = hello.data.role;
     let ustaadId = '';
 
-    fetch(`http://10.0.2.2:3000/service-recodes/${userId}`)
+    fetch(`http://localhost:3000/service-recodes/${userId}`)
             .then((res) => res.json())
             .then (serviceData => {
             setServiceData(serviceData)
@@ -110,7 +110,7 @@ useEffect(() => {
 
                 <View key={ndx} style={{marginLeft: 10, marginTop: 25, flexDirection: 'row', alignItems: 'center', alignSelf: 'flex-start'}}>
                     <Avatar.Image  size={50} source={require('../../src/assets/Login.png')} />
-                    <Text style={{padding: 8}}>Hello, {item._id}  {'\n'}{item.ustaadId}, <Text onPress={() => navigation.navigate("SeeServiceDetails", {Id: item._id})} style={{color: '#10047c', fontWeight: 'bold'}}>View Details</Text></Text>
+                    <Text style={{padding: 8}}>Hello, {item.userId}  {'\n'}{item.ustaadId}, <Text onPress={() => navigation.navigate("SeeServiceDetails", {Id: item._id})} style={{color: '#10047c', fontWeight: 'bold'}}>View Details</Text></Text>
                 </View>
             ))}
         </View>

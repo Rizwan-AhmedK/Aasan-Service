@@ -1,6 +1,6 @@
 import React from 'react'
 import { View, Text, Image, StyleSheet, KeyboardAvoidingView, ScrollView, Alert} from 'react-native'
-import { TextInput, Button, Checkbox } from 'react-native-paper';
+import { TextInput, Button, Checkbox, IconButton } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 
 
@@ -26,11 +26,14 @@ export default function ServiceDetail({route}) {
 const navigation = useNavigation();
 const [checked, setChecked] = React.useState(false);
 
+
     const [problemDescription, setproblemDescription] = React.useState('');
     
     return (
         
         <KeyboardAvoidingView  style={{backgroundColor: '#10047c',flex: 1, flexDirection: 'column'}}>
+            <IconButton icon="home" color='white' size={25} onPress={() => navigation.navigate("UserMainScreen")} />
+
         <View style={{backgroundColor: '#10047c', flex: 1, alignItems: 'center', justifyContent: 'center'}}> 
         <Image source={require('../../src/assets/Login.png')} />
         <Text style={{color: "white", fontSize: 25, paddingTop: 20, textAlign: 'center', paddingBottom: 20}}>Please Describe Your Problem in Detail</Text>

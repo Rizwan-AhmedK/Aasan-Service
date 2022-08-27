@@ -14,7 +14,7 @@ let Id = '';
 
 useEffect(() => {
     const fetchFirst = async () => {
-        const data = await fetch(`http://10.0.2.2:3000/service-recod/${userId}`)
+        const data = await fetch(`http://localhost:3000/service-recod/${userId}`)
         // setting the new found data in a useState
         const jsonData = await data.json()
         setServiceData(jsonData);
@@ -25,7 +25,7 @@ useEffect(() => {
         console.log(data1, "data1")
         const Id = data1.ustaadId;
         console.log(Id,"id")
-       const data = await fetch(`http://10.0.2.2:3000/service-recod-ustaad/${Id}`)
+       const data = await fetch(`http://localhost:3000/service-recod-ustaad/${Id}`)
        const jsonData = await data.json()
        console.log(jsonData, "data")
         // setting the new found data in a useState

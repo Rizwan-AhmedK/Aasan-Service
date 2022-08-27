@@ -7,6 +7,8 @@ import { CommandStartedEvent } from 'mongodb';
 
 
 export default function PaymentSystem({ route }) {
+    const title = "work request";
+    const message = "New Work request is initiated";
 
     const {
         userId, 
@@ -23,7 +25,7 @@ export default function PaymentSystem({ route }) {
 
 
 const insertServiceRecords = () => {
-    fetch("http://10.0.2.2:3000/avail-service", {
+    fetch("http://localhost:3000/avail-service", {
         method : "post",
         headers:{
             'Content-Type': 'application/json' 

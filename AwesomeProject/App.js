@@ -41,6 +41,8 @@ import UserNotification from "./Fronend/Screens/UserNotification";
 import SeeServiceDetails from "./Fronend/Screens/SeeServiceDetails";
 import UserSettings from "./Fronend/Screens/UserSettings";
 import SeeServiceDetailsUstaad from "./Fronend/Screens/SeeServiceDetailsUstaad";
+import AcceptAndRejectScreen from "./Fronend/Screens/AcceptAndRejectScreen";
+
 
 const Stack = createNativeStackNavigator();
 
@@ -72,6 +74,8 @@ const MyStack = () => {
         <Stack.Screen name="ServiceDetail" component={ServiceDetail} />
         <Stack.Screen name="SeeServiceDetailsUstaad" component={SeeServiceDetailsUstaad} />
         <Stack.Screen name="ServiceDetailStep2" component={ServiceDetailStep2} />
+        <Stack.Screen name="AcceptAndRejectScreen" component={AcceptAndRejectScreen} />
+        
         <Stack.Screen name="ServiceDetailStep3" component={ServiceDetailStep3} />
         <Stack.Screen name="SeeUstaadProfile" component={SeeUstaadProfile} />
         <Stack.Screen name="EnterDetails" component={EnterDetails} />

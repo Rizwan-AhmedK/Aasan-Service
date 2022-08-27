@@ -38,7 +38,7 @@ async function fun () {
     let hello = JSON.parse(user)
     let ustaadId = hello.data._id;
 
-    fetch(`http://10.0.2.2:3000/service-recodes-ustaad/${ustaadId}`)
+    fetch(`http://localhost:3000/service-recodes-ustaad/${ustaadId}`)
             .then((res) => res.json())
             .then (serviceData => {
             setServiceData(serviceData)
@@ -48,7 +48,7 @@ async function fun () {
         }) 
     }
 
-
+    console.log(serviceData)
      
         //     const ustaadId = [...new Set(serviceData.map(item => item.ustaadId))];
         //     console.log(ustaadId)
@@ -109,7 +109,7 @@ useEffect(() => {
 
                 <View key={ndx} style={{marginLeft: 10, marginTop: 25, flexDirection: 'row', alignItems: 'center', alignSelf: 'flex-start'}}>
                     <Avatar.Image  size={50} source={require('../../src/assets/Login.png')} />
-                    <Text style={{padding: 8}}>Hello, {item._id}  {'\n'}{item.ustaadId}, <Text onPress={() => navigation.navigate("SeeServiceDetailsUstaad", {Id: item._id})} style={{color: '#10047c', fontWeight: 'bold'}}>View Details</Text></Text>
+                    <Text style={{padding: 8}}>Hello, {item.userId}  {'\n'}{item.ustaadId}, <Text onPress={() => navigation.navigate("SeeServiceDetailsUstaad", {Id: item._id})} style={{color: '#10047c', fontWeight: 'bold'}}>View Details</Text></Text>
                 </View>
             ))}
         </View>

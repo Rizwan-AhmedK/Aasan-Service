@@ -9,10 +9,11 @@ export default function Services({route}) {
    console.log(id)
 const navigation = useNavigation();
 
-    const [text, setText] = React.useState('');
     return (
         
         <ScrollView  style={{backgroundColor: '#10047c',flex: 1, flexDirection: 'column'}}>
+            <IconButton icon="home" color='white' size={25} onPress={() => navigation.navigate("UserMainScreen")} />
+       
         <View style={{backgroundColor: '#10047c', flex: 1, alignItems: 'center', justifyContent: 'center'}}> 
         <Image source={require('../../src/assets/Login.png')} />
         <Text style={{color: "white", fontSize: 30, paddingTop: 15}}>Services</Text>

@@ -7,20 +7,21 @@ import { useNavigation } from '@react-navigation/native';
 export default function AddMoreWorkScreen({route}) {
 const navigation = useNavigation();
 
-let workaddedby, workaddedfor;
+let by, fors;
     const Role = route.params.Role;
     if(Role == 'user'){
-        workaddedfor = route.params.ustaadID;
-        workaddedby = route.params.userID;}
+        fors = route.params.ustaadID;
+        by = route.params.userID;}
     else{
-        workaddedby = route.params.ustaadID;
-        workaddedfor = route.params.userID;
+        by = route.params.ustaadID;
+        fors = route.params.userID;
     }
     const [workDetails, setWorkDetails] = useState('');
-    const [workAmount, setWorkAmount] = useState(0);
+    const [workAmount, setWorkAmount] = useState('');
+    const title = "Extra Work Request";
+    const message = "Extra work is added by " + Role;
     console.log(workDetails)
     console.log(workAmount)
-
 
     const showAlert = () => {
         Alert.alert(
@@ -31,26 +32,18 @@ let workaddedby, workaddedfor;
                 if(Role == 'user'){
                     navigation.navigate("UserMainScreen")}
                 else{navigation.navigate("UstaadMainScreen")}
-            }  
-        }
-          ]
-        )
-      }
-
+            }}])}
+//10.0.2.2
 const submitData = () => {
-    fetch("http://10.0.2.2:3000/addmorework", {
+    fetch("http://localhost:3000/temp", {
         method : "post",
         headers:{
             'Content-Type': 'application/json' 
         },
         body:JSON.stringify({
-            workaddedby, 
-            workaddedfor,
-            workDetails,
-            workAmount
-
-        })
-    })
+            by, fors,workDetails,
+            workAmount, message,title
+        })})
     
     .then(res=>res.json())
     .then(data => {
@@ -59,9 +52,7 @@ const submitData = () => {
     }).catch(err => {
         console.log(err)
     })
-  
     showAlert()
-   
   }
 
     const [text, setText] = React.useState('');
@@ -80,26 +71,18 @@ const submitData = () => {
                 value={workDetails}
                 onChangeText={setWorkDetails}
                 label="Enter Task Details"/>
-
-
             <Text style={{marginTop: 70}}>Amount for your Servies</Text>
-
             <TextInput style={{width: 350, marginTop: 20}}
                 value={workAmount}
                 onChangeText={setWorkAmount}
                 label="Amount"
                 keyboardType = 'numeric'
                 />
-
-            
             <Button style={{backgroundColor: 'green', marginTop: 80}} mode="contained" onPress={submitData}>
               Submit Request
             </Button>
-
-  
         </View>           
         </KeyboardAvoidingView>
         
-    )
-}
+    )}
 

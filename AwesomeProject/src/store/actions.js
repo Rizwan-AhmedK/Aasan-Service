@@ -21,7 +21,7 @@ export const Init = () => {
 let status=false;
 
 export const Login = (username, password) => {
-  fetch("http://10.0.2.2:3000/login", {
+  fetch("http://localhost:3000/login", {
     method : "post",
     headers:{
         'Content-Type': 'application/json' 

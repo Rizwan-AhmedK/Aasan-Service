@@ -20,7 +20,7 @@ console.log(id, field, ProblemStatement, latitude, longitude, ustaadId)
 
 
 useEffect(() => {
-  fetch(`http://10.0.2.2:3000/user-recodrs/${id}`)
+  fetch(`http://localhost:3000/user-recodrs/${id}`)
   .then((res) => res.json())
   .then (data => {
     setData(data)

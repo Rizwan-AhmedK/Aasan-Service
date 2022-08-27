@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 
 const AddMoreWorkSchema = new mongoose.Schema({
-    workaddedby: String,
-    workaddedfor: String,
+    by: String,
+    fors: String,
     workDetails: String,
     workAmount: Number,
 })

@@ -30,7 +30,7 @@ export default function signUpUserStep2({route}) {
 
 
   const submitData = () => {
-    fetch("http://10.0.2.2:3000/usersignup", {
+    fetch("http://localhost:3000/usersignup", {
         method : "post",
         headers:{
             'Content-Type': 'application/json' 

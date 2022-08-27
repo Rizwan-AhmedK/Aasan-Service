@@ -11,11 +11,13 @@ require('./Service')
 require('./Complain')
 require('./Ratting')
 require('./AddMoreWork')
+require('./Temp')
 const Users = mongoose.model("Users")
 const Service = mongoose.model('Service')
 const Complain = mongoose.model('Complain')
 const Ratting = mongoose.model('Ratting')
 const AddMoreWork = mongoose.model('AddMoreWork')
+const Temp = mongoose.model('Temp')
 
 app.use(bodyParser.json())
 
@@ -33,6 +35,96 @@ mongoose.connection.on("connected", () => {
 mongoose.connection.on("error", (err) => {
     console.log("error while connecting", err)
 })
+
+//ratting notification 
+app.get('/rating-check/:id', (req, res) => {
+    console.log(req.params.id)
+    Temp.find({rattingby: req.params.id})
+    .then(data => {
+        res.send(data)
+    })
+    .catch(err => {
+        res.send(err)
+    }) 
+})
+
+
+//notification
+app.get('/notification/:id', (req, res) => {
+    console.log(req.params.id)
+    Temp.find({fors: req.params.id})
+    .then(data => {
+        res.send(data)
+    })
+    .catch(err => {
+        res.send(err)
+    }) 
+})
+
+
+//add more work notification
+app.get('/addMoreWork-check/:id', (req, res) => {
+    console.log(req.params.id)
+    Temp.find({workaddedfor: req.params.id})
+    .then(data => {
+        res.send(data)
+    })
+    .catch(err => {
+        res.send(err)
+    }) 
+})
+
+//work request notification
+app.get('/work-request-check/:id', (req, res) => {
+    console.log(req.params.id)
+    Temp.find({ustaadId: req.params.id})
+    .then(data => {
+        res.send(data)
+    })
+    .catch(err => {
+        res.send(err)
+    }) 
+})
+
+
+
+//Temp data for notifying 
+app.post('/temp', async(req, res) => { 
+    const temp = new Temp({
+        by:req.body.by,
+        fors:req.body.fors,
+        workDetails:req.body.workDetails,
+        workAmount:req.body.workAmount,
+
+        message: req.body.message,
+        title: req.body.title,
+
+
+        ratting:req.body.ratting,
+        rattingComment:req.body.rattingComment,
+            
+        userId:req.body.userId, 
+        field:req.body.field, 
+        problemStatement:req.body.problemStatement, 
+        latitude: req.body.latitude, 
+        longititude:req.body.longititude, 
+        ustaadId: req.body.ustaadId, 
+        date: req.body.date, 
+        email: req.body.email, 
+        _name:req.body.name, 
+        phone: req.body.phone, 
+        address: req.body.address
+    })
+    
+    temp.save()
+    .then(data=>{
+        console.log(data)
+        res.send("saved")
+    }).catch(err=>{
+        console.log(err)
+    })
+}
+)
 
 
 //complain data
@@ -56,8 +148,8 @@ app.post('/complain', async(req, res) => {
 //Ratting data
 app.post('/ratting', async(req, res) => { 
     const ratting = new Ratting({
-        rattingby:req.body.rattingby,
-        rattingfor:req.body.rattingfor,
+        by:req.body.by,
+        fors:req.body.fors,
         ratting:req.body.ratting,
         rattingComment:req.body.rattingComment,
     })
@@ -76,8 +168,8 @@ app.post('/ratting', async(req, res) => {
 //AddMoreWork data
 app.post('/addmorework', async(req, res) => { 
     const addmorework = new AddMoreWork({
-        workaddedby:req.body.workaddedby,
-        workaddedfor:req.body.workaddedfor,
+        by:req.body.by,
+        fors:req.body.fors,
         workDetails:req.body.workDetails,
         workAmount:req.body.workAmount,
     })
