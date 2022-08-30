@@ -44,6 +44,9 @@ export default function ShowInspectionPrice( { navigation, route } ) {
         <Text style={{fontSize: 15, marginTop: 10, textAlign: 'center', fontWeight: 'bold', padding: 10}}>Hello, here is the total inspection charges of our services. it only apply for inspection.<Text style={{color: '#10047c'}}>Terms and Conditions</Text></Text>
 
 
+
+
+          
    <Text style={{fontSize: 30,  marginTop: 50, textAlign: 'center', fontWeight: 'bold', }}>Rs. 500</Text>
 
 
