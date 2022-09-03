@@ -16,6 +16,7 @@ const navigation = useNavigation();
 
 const [username, setUsername] = useState('');
 const [password, setPassword] = useState('');
+const [passnull, setPassNull] = useState(true);
 
 
 
@@ -27,7 +28,11 @@ const [loading, setLoading] = useState(false)
 
 const dispatch = useDispatch();
 const submit = () => {
-  dispatch(Login(username, password))
+  if(!username.trim()){Alert.alert("Please Enter the Email")}
+  else if(!password.trim()){Alert.alert("Please Enter the Password")}
+
+  else{dispatch(Login(username, password))}
+  
  
   // navigation.navigate("UserMainScreen", {hello: "pakistan"})
 }
@@ -56,23 +61,25 @@ const navigate = () => {
 
             <TextInput style={{width: 350, marginTop: 20}}
             label="Password"
-            secureTextEntry
+            secureTextEntry={passnull}
+            right={<TextInput.Icon name="eye" color="#10047c" onPress={()=> setPassNull(false)}/>}
             left={<TextInput.Icon name="lock" color="#10047c" />}
             value={password}
             onChangeText={(text) => setPassword(text)}
             />
-            <Text onPress={() => navigation.navigate("ForgetPassword")}>Forgot Password?</Text>
 
 
-            <Button style={{backgroundColor: '#10047c', marginTop: 20}} mode="contained" onPress={submit}>
+            <Button style={{backgroundColor: '#10047c', marginTop: 50, width: '80%', marginBottom: 30}} mode="contained" onPress={submit}>
               Login
             </Button>
 
-            <Button style={{marginTop: 20, color: "#10047c"}} mode="outlined" onPress={navigate}>
+            <Text>________________ OR ________________</Text>
+
+            <Button style={{marginTop: 40, color: "#10047c", width: '80%'}} mode="outlined" onPress={navigate}>
               Create User Account
             </Button>
 
-            <Button style={{marginTop: 20, color: "#10047c"}} mode="outlined" onPress={()=>navigation.navigate("SignUpUstaad")}>
+            <Button style={{marginTop: 20, color: "#10047c", width: '80%'}} mode="outlined" onPress={()=>navigation.navigate("SignUpUstaad")}>
               Create Ustaad Account
             </Button>
 

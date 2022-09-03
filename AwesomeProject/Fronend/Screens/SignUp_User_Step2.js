@@ -136,13 +136,13 @@ const navigation = useNavigation();
             left={<TextInput.Icon name="city" color="#10047c" />}
             />
 
-            <Text style={{marginTop: 20, fontWeight: 'bold'}}>Upload Your CNIC Card</Text>
+            <Text style={{marginTop: 70, fontWeight: 'bold'}}>Upload Your CNIC Card</Text>
                     
-            <Button icon={frontCNIC==""?"image-area":"check"}  style={{backgroundColor: '#10047c', marginTop: 20}} mode="contained" onPress={() => setModal(true)}>
+            <Button icon={frontCNIC==""?"image-area":"check"}  style={{backgroundColor: 'green', width: '80%', marginTop: 20}} mode="contained" onPress={() => setModal(true)}>
               Upload CNIC
             </Button>
 
-            <Button style={{backgroundColor: '#10047c', marginTop: 40}} mode="contained" 
+            <Button style={{backgroundColor: '#10047c', marginTop: 15, width: '80%', marginBottom: 155}} mode="contained" 
             onPress={() => {if(!city.trim()){Alert.alert("Please enter your city name")}
             else if(!frontCNIC.trim()){Alert.alert("Please Upload CNIC")}
             else if(!phone.trim()){Alert.alert("Plaese enter your phone number")} else { submitData()}} 
@@ -166,7 +166,7 @@ const navigation = useNavigation();
       Galary
     </Button>
     </View>
-     <Button style={{backgroundColor: 'red', marginTop: 20}} mode="contained" onPress={() => setModal(false)}>
+     <Button style={{backgroundColor: 'red', marginTop: 20, margin: 40}} mode="contained" onPress={() => setModal(false)}>
       cancel
     </Button>
       

@@ -127,6 +127,20 @@ app.post('/temp', async(req, res) => {
 )
 
 
+//delete requet from notification
+app.delete('/deleteRequestfromNoti/:id', async(req, res) => { 
+    console.log(req.params.id)
+    Temp.findByIdAndDelete(req.params.id)
+    .then(data=>{
+        console.log(data)
+        res.send("deleted")
+    }).catch(err=>{
+        console.log(err)
+    })
+}
+)
+
+
 //complain data
 app.post('/complain', async(req, res) => { 
     const complain = new Complain({
@@ -365,8 +379,8 @@ app.post('/avail-service', async(req, res) => {
 
 
 //api find ustaad where role == ustaad
-app.get('/ustaadlist', async(req, res) => { 
-    Users.find({role: "ustaad"}).then(data=>{
+app.get('/ustaadlist/:field', async(req, res) => { 
+    Users.find({role: "ustaad", field: req.params.field}).then(data=>{
         console.log(data)
         res.send(data)
     }).catch(err=>{

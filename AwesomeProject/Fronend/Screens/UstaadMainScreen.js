@@ -63,6 +63,8 @@ async function fun () {
 
 useEffect(() => {     
     fun()
+
+    
         if(data.length > 0){
             setLoading(false)
             console.log(data)

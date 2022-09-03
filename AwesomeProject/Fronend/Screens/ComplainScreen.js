@@ -33,9 +33,7 @@ export default function ComplainScreen({route}) {
                 else{navigation.navigate("UstaadMainScreen")}
             }  
         }
-          ]
-        )
-      }
+          ] ) }
 
 const submitData = () => {
     fetch("http://localhost:3000/complain", {

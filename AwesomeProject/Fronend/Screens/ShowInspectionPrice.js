@@ -46,9 +46,7 @@ export default function ShowInspectionPrice( { navigation, route } ) {
 
 
 
-          
    <Text style={{fontSize: 30,  marginTop: 50, textAlign: 'center', fontWeight: 'bold', }}>Rs. 500</Text>
-
 
             
             <Button style={{backgroundColor: '#10047c', marginTop:60, width: '50%'}} mode="contained" onPress={() => navigation.navigate('PaymentSystem', {

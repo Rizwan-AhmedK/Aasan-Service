@@ -142,15 +142,11 @@ then(data => {
             label="About Yourself"
             onChangeText={setAbout}
             value={about}
-            left={<TextInput.Icon name="account" color="#10047c"/>}
             mode='outlined'
             />
 
-            <Button icon={frontCNIC==""?"image-area":"check"} style={{backgroundColor: '#10047c', marginTop: 40}} mode="contained"  onPress={() => setModal(true)}>
-              Upload CNIC
-            </Button>
 
-        <View style={{flexDirection: 'row', flex: 1, alignContent: 'center', alignItems: 'center', marginTop: 45}}>
+<View style={{flexDirection: 'row', flex: 1, alignContent: 'center', alignItems: 'center', marginTop: 85}}>
             <Checkbox
               Type='checked'
               color='#10047c'
@@ -161,8 +157,14 @@ then(data => {
             />
             <Text>I agree With All <Text style={{color: '#10047c', fontWeight: 'bold'}}>Terms And Conditions.</Text></Text>
     </View>
+
+            <Button icon={frontCNIC==""?"image-area":"check"} style={{backgroundColor: 'green', marginTop: 40, width: '80%'}} mode="contained"  onPress={() => setModal(true)}>
+              Upload CNIC
+            </Button>
+
+       
             
-            <Button icon="check" style={{backgroundColor: '#10047c', marginTop: 40, marginBottom: 60}} mode="contained" onPress={() => {
+            <Button icon="check" style={{backgroundColor: '#10047c', marginTop: 10, marginBottom: 170, width: '80%'}} mode="contained" onPress={() => {
               if (!checked) {Alert.alert("Please Agree to our terms and conditions")}
               else if (!frontCNIC.trim()) {Alert.alert("Plaese Upload CNIC")}
               else if (!about.trim()) {Alert.alert("Plaese write something about yourself", "example: i am an electrian, i can do...")}
@@ -177,10 +179,10 @@ then(data => {
           animatedType="slide"
           transparent={false}
           visible={modal}
-          style={{backgroundColor: "white", position: 'absolute', bottom: 2, width: "100%"}}
+          style={{backgroundColor: "white", position: 'absolute', top: 2, width: "100%"}}
         >
 
-    <View style={{alignContent: 'center', alignItems: 'center', flexDirection: "row", justifyContent: 'space-around'}}>
+    <View style={{alignContent: 'center', alignItems: 'center', flexDirection: "row", justifyContent: 'space-around', marginTop: 350}}>
     <Button icon={frontCNIC==""?"camera":"check"} style={{backgroundColor: '#10047c'}} mode="contained"  onPress={openCamera}>
         Camera
     </Button>
@@ -189,7 +191,7 @@ then(data => {
       Galary
     </Button>
     </View>
-     <Button style={{backgroundColor: 'red', marginTop: 20}} mode="contained" onPress={() => setModal(false)}>
+     <Button style={{backgroundColor: 'red', marginTop: 20, margin: 40}} mode="contained" onPress={() => setModal(false)}>
       cancel
     </Button>
       

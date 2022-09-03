@@ -37,7 +37,6 @@ const [serviceDetailsName, setServiceDetailsName] = useState('')
 const [serviceDetailsPhone, setServiceDetailsPhone] = useState('')
 const [serviceDetailsAddress, setServiceDetailsAddress] = useState('')
 
-console.log(data.email)
 
     return (
         <ScrollView>
@@ -53,7 +52,7 @@ console.log(data.email)
             onChangeText={setServiceDetailsEmail}
             style={{width: 350, marginTop: 30}}
             label="Email"
-            left={<TextInput.Icon name="account" color="#10047c"/>}
+            left={<TextInput.Icon name="email" color="#10047c"/>}
             mode='outlined'
             />
 
@@ -64,7 +63,7 @@ console.log(data.email)
             label="Name"
             mode='outlined'
             secureTextEntry
-            left={<TextInput.Icon name="lock" color="#10047c" />}
+            left={<TextInput.Icon name="account" color="#10047c" />}
             />
 
             <TextInput
@@ -73,7 +72,8 @@ console.log(data.email)
             style={{width: 350, marginTop: 10}}
             label="Phone"
             mode='outlined'
-            left={<TextInput.Icon name="lock" color="#10047c" />}
+            keyboardType='numeric'
+            left={<TextInput.Icon name="phone" color="#10047c" />}
             />
 
             <TextInput 
@@ -83,7 +83,7 @@ console.log(data.email)
             multiline
             label="complete address"
             mode='outlined'
-            left={<TextInput.Icon name="lock" color="#10047c" />}
+            left={<TextInput.Icon name="navigation" color="#10047c" />}
             />
 
 

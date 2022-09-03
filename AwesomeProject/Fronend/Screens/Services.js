@@ -22,12 +22,12 @@ const navigation = useNavigation();
         <View style={{backgroundColor: 'white', alignItems: 'center', flex: 2.5, borderTopLeftRadius: 30, borderTopRightRadius: 30}}>
         <View style={{alignItems: 'center', flexDirection: 'row'}} >
                 <View style={{alignItems: 'center', margin: 12, marginRight: 45, alignContent: 'center', padding: 25, borderRadius: 10}}>
-                    <IconButton icon="transmission-tower" color='#10047c' size={35} onPress={() => navigation.navigate("ServiceDetail", {Field: "Electrician", Id: id})} />
+                    <IconButton icon="transmission-tower" color='#10047c' size={35} onPress={() => navigation.navigate("ServiceDetail", {Field: "electrician", Id: id})} />
                     <Text style={{color: '#10047c', fontSize: 20}}>Electrician</Text>
                 </View>
 
                 <View style={{alignItems: 'center', margin: 8, marginRight: 25, alignContent: 'center', padding: 25, borderRadius: 10}}>
-                    <IconButton icon="pipe-disconnected" color='#10047c' size={35} onPress={() => navigation.navigate("ServiceDetail", {Field: "Plumber", Id: id})} />
+                    <IconButton icon="pipe-disconnected" color='#10047c' size={35} onPress={() => navigation.navigate("ServiceDetail", {Field: "plumber", Id: id})} />
                     <Text style={{color: '#10047c', fontSize: 20}}>Plumber</Text>
                 </View>
             </View>
@@ -35,12 +35,12 @@ const navigation = useNavigation();
 
             <View style={{alignItems: 'center', flexDirection: 'row'}}>
                 <View style={{alignItems: 'center', margin: 8, alignContent: 'center', padding: 25, borderRadius: 10}}>
-                    <IconButton icon="air-conditioner" color='#10047c' size={35} onPress={() => navigation.navigate("ServiceDetail", {Field: "AC Machenic", Id: id})} />
+                    <IconButton icon="air-conditioner" color='#10047c' size={35} onPress={() => navigation.navigate("ServiceDetail", {Field: "AcMachenic", Id: id})} />
                     <Text style={{color: '#10047c', fontSize: 20}}>AC Machenic</Text>
                 </View>
 
                 <View style={{alignItems: 'center', margin: 8, alignContent: 'center', padding: 25, borderRadius: 10}}>
-                    <IconButton icon="car" color='#10047c' size={35} onPress={() => navigation.navigate("ServiceDetail", {Field: "Car Machenic", Id: id})} />
+                    <IconButton icon="car" color='#10047c' size={35} onPress={() => navigation.navigate("ServiceDetail", {Field: "CarMachenic", Id: id})} />
                     <Text style={{color: '#10047c', fontSize: 20}}>Car Machenic</Text>
                 </View>
             </View>
@@ -48,7 +48,7 @@ const navigation = useNavigation();
 
             <View style={{alignItems: 'center', flexDirection: 'row', paddingBottom: 5}}>
                 <View style={{alignItems: 'center', margin: 8, marginRight: 35, alignContent: 'center', padding: 25, borderRadius: 10}}>
-                    <IconButton icon="desktop-classic" color='#10047c' size={35} onPress={() => navigation.navigate("ServiceDetail", {Field: "Pc Machenic", Id: id})} />
+                    <IconButton icon="desktop-classic" color='#10047c' size={35} onPress={() => navigation.navigate("ServiceDetail", {Field: "ComputerEnginer", Id: id})} />
                     <Text style={{color: '#10047c', fontSize: 20}}>Pc Machenic</Text>
                 </View>
 

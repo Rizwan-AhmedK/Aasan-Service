@@ -36,7 +36,7 @@ const [phone, setPhone] = useState("");
             label="Phone"
             onChangeText={setPhone}
             value={phone}
-            left={<TextInput.Icon name="account" color="#10047c"/>}
+            left={<TextInput.Icon name="phone" color="#10047c"/>}
             mode='outlined'
             />
 
@@ -45,23 +45,24 @@ const [phone, setPhone] = useState("");
             mode='outlined'
             onChangeText={setCity}
             value={city}
-            secureTextEntry
-            left={<TextInput.Icon name="lock" color="#10047c" />}
+            left={<TextInput.Icon name="navigation" color="#10047c" />}
             />
 
-          <Text style={{marginTop: 25, fontWeight: 'bold'}}>Please Choose Your Field</Text>
+          <Text style={{marginTop: 55, fontWeight: 'bold'}}>Please Choose Your Field of Work</Text>
             <Picker label="Enter Your Profession" 
-            style={{width: 380, borderWidth: 10, marginTop: 25, backgroundColor: "#10047c", color: "white"}}
+            style={{width: 350, borderWidth: 10, marginTop: 25, backgroundColor: "#10047c", color: "white"}}
             selectedValue={selectedLanguage}
             onValueChange={(itemValue, itemIndex) =>
                 setSelectedLanguage(itemValue)}>
-            <Picker.Item label="Electrician" value="Electrician" />
+            <Picker.Item label="Electrician" value="electrician" />
             <Picker.Item label="Ac Machenic" value="AcMachenic" />
-            <Picker.Item label="Computer Enginer" value="ComputerEnginer" />
+            <Picker.Item label="Computer Mechanic" value="ComputerEnginer" />
+            <Picker.Item label="Plumber" value="plumber" />
             <Picker.Item label="Car Mahenic" value="CarMachenic" />
+            <Picker.Item label="Carpenter" value="Carpenter" />
             </Picker>
           
-            <Button icon="arrow-right-bold" style={{backgroundColor: '#10047c', marginTop: 45}} mode="contained" 
+            <Button icon="arrow-right-bold" style={{backgroundColor: '#10047c', marginTop: 55, width: '80%'}} mode="contained" 
             onPress={() => {
             if(!city.trim()){Alert.alert("Please enter your city name")}
             else if(!selectedLanguage.trim()){Alert.alert("Please select a field")}
@@ -79,7 +80,7 @@ const [phone, setPhone] = useState("");
               )}}}>
             Next</Button>
 
-            <Text style={{paddingTop: 10}}>I already have an Account?<Text style={{fontWeight: 'bold', color: "#10047c"}} 
+            <Text style={{paddingTop: 10, marginBottom: 78}}>I already have an Account?<Text style={{fontWeight: 'bold', color: "#10047c"}} 
              onPress={() => navigation.navigate('LoginUser', {User: "Ustaad"})}>Login</Text></Text>
             
            

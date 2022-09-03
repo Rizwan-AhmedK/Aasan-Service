@@ -36,7 +36,7 @@ export default function signUpUstaad() {
             mode='outlined'
             onChangeText={setEmail}
             value={email}
-            left={<TextInput.Icon name="lock" color="#10047c" />}
+            left={<TextInput.Icon name="email" color="#10047c" />}
             />
 
             <TextInput style={{width: 350, marginTop: 10}}
@@ -56,7 +56,7 @@ export default function signUpUstaad() {
             />
 
             
-            <Button icon="arrow-right-bold" style={{backgroundColor: '#10047c', marginTop: 35}} mode="contained" onPress={() => 
+            <Button icon="arrow-right-bold" style={{backgroundColor: '#10047c', marginTop: 75, width: '80%'}} mode="contained" onPress={() => 
             {if(pass !== repass){Alert.alert("Your password does not matched")}
              else if(!pass.trim()){Alert.alert("Please enter your password")}
              else if(!email.trim()){Alert.alert("Plaese enter your email")}
@@ -77,7 +77,7 @@ export default function signUpUstaad() {
               Next
             </Button>
 
-            <Text style={{paddingTop: 10}}>I already have an Account?<Text style={{fontWeight: 'bold', color: "#10047c"}}  
+            <Text style={{paddingTop: 10, marginBottom: 80}}>I already have an Account?<Text style={{fontWeight: 'bold', color: "#10047c"}}  
               onPress={() => navigation.navigate('LoginUser', {User: "Ustaad"}) }>
                 Login</Text>
             </Text>

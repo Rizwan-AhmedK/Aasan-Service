@@ -27,7 +27,7 @@ const [text, setText] = useState('');
 
             
             
-            <Button style={{backgroundColor: '#10047c', marginTop: 30, width: '50%'}} mode="contained" onPress={() => navigation.navigate('Home')}>
+            <Button style={{backgroundColor: '#10047c', marginTop: 30, width: '50%'}} mode="contained" onPress={() => navigation.navigate('UserMainScreen')}>
               OK
             </Button>           
             

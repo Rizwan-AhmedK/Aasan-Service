@@ -64,7 +64,7 @@ const submitData = () => {
             />
 
             
-            <Button icon="arrow-right-bold" style={{backgroundColor: '#10047c', marginTop: 35}} mode="contained"
+            <Button icon="arrow-right-bold" style={{backgroundColor: '#10047c', marginTop: 75, width: '80%'}} mode="contained"
              onPress={() => {if(pass !== repass){Alert.alert("Your password does not matched")}
              else if(!pass.trim()){Alert.alert("Please enter your password")}
              else if(!email.trim()){Alert.alert("Plaese enter your email")}
@@ -73,7 +73,7 @@ const submitData = () => {
               Next
             </Button>
 
-            <Text style={{paddingTop: 10}}>I already have an Account?<Text style={{fontWeight: 'bold', color: "#10047c"}}  onPress={() => navigation.navigate('LoginUser')}>Login</Text></Text>
+            <Text style={{paddingTop: 10, marginBottom: 75}}>I already have an Account?<Text style={{fontWeight: 'bold', color: "#10047c"}}  onPress={() => navigation.navigate('LoginUser')}>Login</Text></Text>
            
             
         </View>           

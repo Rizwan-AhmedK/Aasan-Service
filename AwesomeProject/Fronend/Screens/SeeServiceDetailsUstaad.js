@@ -35,37 +35,6 @@ useEffect(() => {
     
 }, []);
 
-
-
-
-
-
-
-
-
-
-
-
-// useEffect(() => {
-
-//     fetch(`http://10.0.2.2:3000/service-recod/${userId}`)
-//     .then((res) => res.json())
-//     .then (serviceData => {
-//     setServiceData(serviceData)
-
-    
-// });
-
-//     Id = servicedata.ustaadId;
-//     console.log(Id)
-
-//     fetch(`http://10.0.2.2:3000/service-recod-ustaad/${Id}`)
-//     .then((res) => res.json())
-//     .then (ustaadData => {
-//     setUstaadData(ustaadData)
-// }) 
-// })
-
 console.log(ustaaddata, "pakistan")
 
     return (
@@ -83,16 +52,20 @@ console.log(ustaaddata, "pakistan")
         <Text style={{textAlign: "center", marginTop: 30, fontSize: 25, fontWeight: 'bold'}}>Your task is at the given location {'\n'}<Text style={{marginTop: 40, fontWeight: 'normal'}}>Latitude: {servicedata.latitude}{'\n'}Longitude: {servicedata.longititude}</Text></Text>
         <Text style={{textAlign: "center", marginTop: 30, fontSize: 25, fontWeight: 'bold'}}>On the following Date and Time {'\n'}<Text style={{marginTop: 40, fontWeight: 'normal'}}>{servicedata.date}</Text></Text>
         
-        <Button style={{marginTop: 70, backgroundColor: 'green', paddingLeft: 5, paddingRight: 5}} mode="contained" onPress={() => navigation.navigate('TaskCompleted', {userID: servicedata.userId, ustaadID: servicedata.ustaadId, Role: 'ustaad'})}>
+        <Button style={{marginTop: 70, backgroundColor: 'green', paddingLeft: 5, paddingRight: 5, width: "80%"}} mode="contained" onPress={() => navigation.navigate('TaskCompleted', {userID: servicedata.userId, ustaadID: servicedata.ustaadId, Role: 'ustaad'})}>
             Work completed
         </Button>
 
-        <Button style={{marginTop: 20, backgroundColor: '#10047c', paddingLeft: 5, paddingRight: 5}} mode="contained" onPress={() => navigation.navigate('AddMoreWorkScreen', {userID: servicedata.userId, ustaadID: servicedata.ustaadId, Role: 'ustaad'})}>
+        <Button style={{marginTop: 20, backgroundColor: '#10047c', paddingLeft: 5, paddingRight: 5, width: "80%"}} mode="contained" onPress={() => navigation.navigate('AddMoreWorkScreen', {userID: servicedata.userId, ustaadID: servicedata.ustaadId, Role: 'ustaad'})}>
             Add More Work
         </Button>
 
-        <Button style={{marginTop: 20, marginBottom: 35, backgroundColor: 'red', paddingLeft: 9, paddingRight: 9}} mode="contained" onPress={() => navigation.navigate('ComplainScreen', {userID: servicedata.userId, ustaadID: servicedata.ustaadId, Role: 'ustaad'})}>
+        <Button style={{marginTop: 20, backgroundColor: 'red', paddingLeft: 9, paddingRight: 9, width: "80%"}} mode="contained" onPress={() => navigation.navigate('ComplainScreen', {userID: servicedata.userId, ustaadID: servicedata.ustaadId, Role: 'ustaad'})}>
             File a Complain 
+        </Button>
+
+        <Button style={{marginTop: 20, marginBottom: 120, backgroundColor: '#10047c', paddingLeft: 9, paddingRight: 9, width: "80%"}} mode="contained" onPress={() => navigation.navigate('ExtraWorkDetails', {userID: servicedata.userId, ustaadID: servicedata.ustaadId, Role: 'user'})}>
+            View Extra Work Details
         </Button>
 
 

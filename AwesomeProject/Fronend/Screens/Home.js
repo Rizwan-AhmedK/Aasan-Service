@@ -48,7 +48,8 @@ const styles = StyleSheet.create(
             borderRadius: 6,
             elevation: 3,
             backgroundColor: '#10047c',
-            marginTop: 20
+            marginTop: 20,
+            width: '80%'
           },
 
           buttonUstaad :{

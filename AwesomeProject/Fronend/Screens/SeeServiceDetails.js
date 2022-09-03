@@ -36,36 +36,6 @@ useEffect(() => {
 }, []);
 
 
-
-
-
-
-
-
-
-
-
-
-// useEffect(() => {
-
-//     fetch(`http://10.0.2.2:3000/service-recod/${userId}`)
-//     .then((res) => res.json())
-//     .then (serviceData => {
-//     setServiceData(serviceData)
-
-    
-// });
-
-//     Id = servicedata.ustaadId;
-//     console.log(Id)
-
-//     fetch(`http://10.0.2.2:3000/service-recod-ustaad/${Id}`)
-//     .then((res) => res.json())
-//     .then (ustaadData => {
-//     setUstaadData(ustaadData)
-// }) 
-// })
-
 console.log(ustaaddata, "pakistan")
 
     return (
@@ -82,7 +52,7 @@ console.log(ustaaddata, "pakistan")
         <View style={{backgroundColor: 'white', alignItems: 'center', flex: 2.5, borderTopLeftRadius: 30, borderTopRightRadius: 30}}>
         <Text style={{textAlign: "center", marginTop: 30, fontSize: 25}}>Your Ustaad will be there by {'\n'}<Text style={{marginTop: 40}}>Date and Time{'\n\n\n\n'}<Text style={{fontSize: 25, fontWeight: 'bold'}}>{servicedata.date}</Text></Text></Text>
         
-        <Button style={{marginTop: 70, backgroundColor: 'green', paddingLeft: 5, paddingRight: 5}} mode="contained" onPress={() => navigation.navigate('TaskCompleted', {userID: servicedata.userId, ustaadID: servicedata.ustaadId, Role: 'user'})}>
+        <Button style={{marginTop: 70, backgroundColor: 'green', paddingLeft: 5, paddingRight: 5, width: "80%"}} mode="contained" onPress={() => navigation.navigate('TaskCompleted', {userID: servicedata.userId, ustaadID: servicedata.ustaadId, Role: 'user'})}>
             Work completed
         </Button>
 
@@ -90,8 +60,12 @@ console.log(ustaaddata, "pakistan")
             Add More Work
         </Button> */}
 
-        <Button style={{marginTop: 20, marginBottom: 95, backgroundColor: 'red', paddingLeft: 9, paddingRight: 9}} mode="contained" onPress={() => navigation.navigate('ComplainScreen', {userID: servicedata.userId, ustaadID: servicedata.ustaadId, Role: 'user'})}>
+        <Button style={{marginTop: 20, marginBottom: 3, backgroundColor: 'red', paddingLeft: 9, paddingRight: 9, width: "80%"}} mode="contained" onPress={() => navigation.navigate('ComplainScreen', {userID: servicedata.userId, ustaadID: servicedata.ustaadId, Role: 'user'})}>
             File a Complain 
+        </Button>
+
+        <Button style={{marginTop: 20, marginBottom: 150, backgroundColor: '#10047c', paddingLeft: 9, paddingRight: 9, width: "80%"}} mode="contained" onPress={() => navigation.navigate('ExtraWorkDetails', {userID: servicedata.userId, ustaadID: servicedata.ustaadId, Role: 'user'})}>
+            View Extra Work Details
         </Button>
 
 
