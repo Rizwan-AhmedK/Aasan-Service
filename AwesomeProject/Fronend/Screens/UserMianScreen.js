@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import { View, Text, Image, StyleSheet, ScrollView} from 'react-native'
+import { View, Text, Image, StyleSheet, ScrollView, RefreshControl} from 'react-native'
 import { TextInput, Button, Avatar, IconButton, Colors, ActivityIndicator  } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { FAB } from 'react-native-paper';
-
 
 
 export default function UserMainScreen({route}) {
@@ -14,6 +13,8 @@ const [data, setData] = useState([])
 const [serviceData, setServiceData] = useState([])
 const [newData, setNewData] = useState([])
 const [loading, setLoading] = useState(true)
+const [refreshing, setRefreshing] = React.useState(false);
+
 
 
 // function timeFunction() {
@@ -28,6 +29,11 @@ const [loading, setLoading] = useState(true)
 // }
 
     
+const onRefresh = React.useCallback(() => {
+    setRefreshing(true);
+    wait(2000).then(() => setRefreshing(false));
+  }, []);
+
 
 async function fun () {
     let user = await AsyncStorage.getItem('user');
@@ -83,12 +89,15 @@ useEffect(() => {
                />
         )
     }
+
     else{
         id = data.data._id;
      
 
     return (
         <ScrollView>
+        
+                
         <View style={{backgroundColor: '#10047c', flex: 1}}>
         <View style={{backgroundColor: '#10047c', flex: 1, alignItems: 'center', justifyContent: 'center', marginTop: 10}}> 
             <Avatar.Image  size={60} source={require('../../src/assets/Login.png')} />
@@ -107,8 +116,8 @@ useEffect(() => {
             </Button>
             <Text style={{color: '#10047c', fontSize: 35, marginTop: 35, fontWeight: 'bold'}}>Order(s) Details</Text>    
               {serviceData.map((item, ndx)=>(
-
                 <View key={ndx} style={{marginLeft: 10, marginTop: 25, flexDirection: 'row', alignItems: 'center', alignSelf: 'flex-start'}}>
+                    
                     <Avatar.Image  size={50} source={require('../../src/assets/Login.png')} />
                     <Text style={{padding: 8}}>Hello, {item.userId}  {'\n'}{item.ustaadId}, <Text onPress={() => navigation.navigate("SeeServiceDetails", {Id: item._id})} style={{color: '#10047c', fontWeight: 'bold'}}>View Details</Text></Text>
                 </View>

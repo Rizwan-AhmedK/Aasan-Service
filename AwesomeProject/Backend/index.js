@@ -49,6 +49,39 @@ app.get('/rating-check/:id', (req, res) => {
 })
 
 
+
+//delete service records
+app.delete('/deleteServiceRecords/:id', (req, res) => {
+    console.log(req.params.id)
+    Service.findByIdAndDelete(req.params.id)
+    .then(data => {
+        res.send(data)
+    })
+    .catch(err => {
+        res.send(err)
+    }) 
+})
+
+
+//Update user records 
+app.put('/updateUserRecords/:id', (req, res) => {
+    console.log(req.params.id)
+    const users = Users.findByIdAndUpdate(req.params.id, {
+        email: req.body.email,
+        name: req.params.name,
+        phone: req.params.phone,
+        city: req.params.city
+    })
+    users.update()
+    .then(data => {
+        res.send(data)
+    })
+    .catch(err => {
+        res.send(err)
+    }) 
+})
+
+
 //notification
 app.get('/notification/:id', (req, res) => {
     console.log(req.params.id)
@@ -134,6 +167,20 @@ app.delete('/deleteRequestfromNoti/:id', async(req, res) => {
     .then(data=>{
         console.log(data)
         res.send("deleted")
+    }).catch(err=>{
+        console.log(err)
+    })
+}
+)
+
+
+//ViewExtraWorkRequest
+app.get('/ViewExtraWorkRequest/:id', async(req, res) => { 
+    console.log(req.params.id)
+    AddMoreWork.find({fors: req.params.id})
+    .then(data=>{
+        console.log(data)
+        res.send(data)
     }).catch(err=>{
         console.log(err)
     })

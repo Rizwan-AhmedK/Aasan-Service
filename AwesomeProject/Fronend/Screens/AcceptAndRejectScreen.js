@@ -20,7 +20,7 @@ export default function AcceptAndRejectScreen({route, navigation}) {
 
     const showAlert = () => {
         Alert.alert(
-          "Your Account creation application is submited",
+          "You Accepted Extra Work Request, view more details at View Extra Work Details page ",
           "",
           [
             { text: "OK", onPress: () =>  {
@@ -42,6 +42,30 @@ export default function AcceptAndRejectScreen({route, navigation}) {
         )
       }
 
+
+      const Reject = () => {
+        Alert.alert(
+          "You rejected Extra Work Request",
+          "",
+          [
+            { text: "OK", onPress: () =>  {
+                
+                console.log('pressed')
+                fetch(`http://localhost:3000/deleteRequestfromNoti/${id}`,{
+                    method: "delete",
+                    headers: {
+                        'Content-Type': "application/json",
+                    }
+                })
+                .then(
+                    navigation.navigate("UserMainScreen")
+                )
+
+
+            }}
+          ]
+        )
+      }
 
     const Aceept = () => {
         if (Title == "Extra Work Request"){
@@ -92,7 +116,7 @@ export default function AcceptAndRejectScreen({route, navigation}) {
              Accept request
             </Button>
 
-        <Button style={{marginTop: 20, backgroundColor: 'red', paddingLeft: 5, paddingRight: 5, marginBottom: 100}} mode="contained" onPress={() => navigation.navigate('UserSettings', {Id: val.data._id, userData: [data]})}>
+        <Button style={{marginTop: 20, backgroundColor: 'red', paddingLeft: 5, paddingRight: 5, marginBottom: 100}} mode="contained" onPress={Reject}>
              Reject Request
             </Button> 
         </View>        

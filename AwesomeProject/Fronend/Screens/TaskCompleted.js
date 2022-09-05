@@ -10,6 +10,7 @@ import { Rating } from 'react-native-ratings';
 export default function UstaadConfirmation({route}) {
     const navigation = useNavigation();
     const Role = route.params.Role;
+    const id = route.params.Id
     let fors, by;
     if(Role == 'user'){
         fors = route.params.ustaadID;
@@ -38,9 +39,18 @@ const showAlert = () => {
       "",
       [
         { text: "OK", onPress: () => {
-            if(Role == 'user'){
-                navigation.navigate("UserMainScreen")}
-            else{navigation.navigate("UstaadMainScreen")}
+            fetch(`http://localhost:3000/deleteServiceRecords/${id}`,{
+                method: "delete",
+                headers: {
+                    'Content-Type': "application/json",
+                }
+            })
+            .then(
+               Role == "user" ? navigation.navigate("UserMainScreen") : navigation.navigate("UstaadMainScreen")
+            )
+            
+
+           
         }  
     }
       ]

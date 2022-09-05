@@ -9,68 +9,33 @@ import { List } from 'react-native-paper';
 
 export default function ExtraWorkDetails({route, navigation}) {
 
+    
+    const [loading, setLoading] = useState(true);
+    const [data, setData] = useState([])
 
     // const Title = route.params.Title;
     // const by = route.params.by;
-    // const fors = route.params.for;
+    const userID = route.params.userID;
+    console.log(userID)
     // const workDetails = route.params.deatils;
     // const Message = route.params.message;
     // const workAmount = route.params.amount;
     // const id = route.params.id;
     // console.log(Title);
 
-    // const showAlert = () => {
-    //     Alert.alert(
-    //       "Your Account creation application is submited",
-    //       "",
-    //       [
-    //         { text: "OK", onPress: () =>  {
-                
-    //             console.log('pressed')
-    //             fetch(`http://localhost:3000/deleteRequestfromNoti/${id}`,{
-    //                 method: "delete",
-    //                 headers: {
-    //                     'Content-Type': "application/json",
-    //                 }
-    //             })
-    //             .then(
-    //                 navigation.navigate("UserMainScreen")
-    //             )
+    useEffect(() => {
+    
+        fetch(`http://localhost:3000/ViewExtraWorkRequest/${userID}`)
+                .then((res) => res.json())
+                .then (serviceData => {
+                setData(serviceData)
+                setLoading(false)
+    
+            }) 
+    
+    }, [])
 
-
-    //         }}
-    //       ]
-    //     )
-    //   }
-
-
-    // const Aceept = () => {
-    //     if (Title == "Extra Work Request"){
-    //         fetch("http://localhost:3000/addmorework", {
-    //             method : "post",
-    //             headers:{
-    //                 'Content-Type': 'application/json' 
-    //             },
-    //             body:JSON.stringify({
-    //                 by,
-    //                 fors,
-    //                 workDetails,
-    //                 workAmount
-    //             })
-    //         })
-            
-    //         .then(res=>res.json())
-    //         .then(data => {
-    //             Alert.alert("Extra Request is accepted")
-    //         }).catch(err => {
-    //             console.log(err)
-    //         })
-    //         showAlert()
-    //     }else{
-    //         Alert.alert("its ratting")
-    //     }
-    // }
-
+    console.log(data)
       
    return (
         <ScrollView>
@@ -82,14 +47,30 @@ export default function ExtraWorkDetails({route, navigation}) {
         </View>
 
         <View style={{backgroundColor: 'white', flex: 2.5, borderTopLeftRadius: 30, borderTopRightRadius: 30}}>
+        {data.map((val, inx) => {
+            return(
         <List.Section>
-    <List.Subheader>List of Extra work</List.Subheader>
-    <List.Item title="First Item" left={() => <List.Icon icon="folder" />} />
+
+       
+                
+    <List.Item key={inx} title={`Amount: ${val.workAmount}`} left={() => <List.Icon icon="folder" />} />
+    <Button style={{marginTop: 20,position: 'absolute', right: 15, backgroundColor: '#10047c'}}  color='white' onPress={() => {
+        Alert.alert(`Work Details: ${val.workDetails}`)
+    }}>Details</Button> 
                 <View style={{ borderBottomColor: 'gray', borderBottomWidth: 1}} />
+               
 
   </List.Section>
-        </View>        
+  
+   )})}
+
+   
+        </View>   
+
   </View>
+
+  
+
         </ScrollView>
         
     )

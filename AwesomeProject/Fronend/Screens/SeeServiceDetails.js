@@ -52,7 +52,7 @@ console.log(ustaaddata, "pakistan")
         <View style={{backgroundColor: 'white', alignItems: 'center', flex: 2.5, borderTopLeftRadius: 30, borderTopRightRadius: 30}}>
         <Text style={{textAlign: "center", marginTop: 30, fontSize: 25}}>Your Ustaad will be there by {'\n'}<Text style={{marginTop: 40}}>Date and Time{'\n\n\n\n'}<Text style={{fontSize: 25, fontWeight: 'bold'}}>{servicedata.date}</Text></Text></Text>
         
-        <Button style={{marginTop: 70, backgroundColor: 'green', paddingLeft: 5, paddingRight: 5, width: "80%"}} mode="contained" onPress={() => navigation.navigate('TaskCompleted', {userID: servicedata.userId, ustaadID: servicedata.ustaadId, Role: 'user'})}>
+        <Button style={{marginTop: 70, backgroundColor: 'green', paddingLeft: 5, paddingRight: 5, width: "80%"}} mode="contained" onPress={() => navigation.navigate('TaskCompleted', {userID: servicedata.userId, ustaadID: servicedata.ustaadId, Role: 'user', Id: servicedata._id})}>
             Work completed
         </Button>
 

@@ -11,7 +11,7 @@ export default function EnterDetails({route}) {
     
 
 
-  console.log(route.params.Id);
+  const Id = route.params.Id;
   const data = route.params.userData;
   console.log(data)
     let emailText, nametext, phonText, cityText;
@@ -29,7 +29,13 @@ const [phone, setPhone] = useState(phonText)
 const [city, setCity] = useState(cityText)
 
 
-
+const Update = () => {
+ 
+    if(!email.trim()){Alert.alert("Please Enter Email")}
+    else if(!name.trim()){Alert.alert("Please Enter Name")}
+    else if(!phone.trim()){Alert.alert("Please Enter Phone")}
+    else if(!city.trim()){Alert.alert("Please Enter City")}    
+}
 
 
     return (
@@ -62,10 +68,10 @@ const [city, setCity] = useState(cityText)
 
             <TextInput
             style={{width: 350, marginTop: 10}}
+            keyboardType="phone-pad"
             value={phone}
             label={phonText}
             onChangeText={setPhone}
-            keyboardType='numeric'
             mode='outlined'
             left={<TextInput.Icon name="phone" color="#10047c" />}
             />
@@ -83,13 +89,7 @@ const [city, setCity] = useState(cityText)
 
   
 
-            <Button icon="update" style={{backgroundColor: '#10047c', marginTop: 25, marginBottom: 188}} mode="contained" onPress={() => {
-                if(!email.trim()){Alert.alert("Please Enter Email")}
-                else if(!name.trim()){Alert.alert("Please Enter Name")}
-                else if(!phone.trim()){Alert.alert("Please Enter Phone")}
-                else if(!city.trim()){Alert.alert("Please Enter City")}
-                else{Alert.alert("hhhhh")}
-            }}>
+            <Button icon="update" style={{backgroundColor: '#10047c', marginTop: 25, marginBottom: 188}} mode="contained" onPress={Update}>
               Update Details
             </Button>   
         </View>           
