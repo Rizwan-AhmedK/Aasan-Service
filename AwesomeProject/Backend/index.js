@@ -49,6 +49,18 @@ app.get('/rating-check/:id', (req, res) => {
 })
 
 
+app.get('/ratingdata/:id', (req, res) => {
+    console.log(req.params.id)
+    Ratting.find({fors: req.params.id})
+    .then(data => {
+        res.send(data)
+    })
+    .catch(err => {
+        res.send(err)
+    }) 
+})
+
+
 
 //delete service records
 app.delete('/deleteServiceRecords/:id', (req, res) => {
@@ -64,21 +76,12 @@ app.delete('/deleteServiceRecords/:id', (req, res) => {
 
 
 //Update user records 
-app.put('/updateUserRecords/:id', (req, res) => {
-    console.log(req.params.id)
-    const users = Users.findByIdAndUpdate(req.params.id, {
-        email: req.body.email,
-        name: req.params.name,
-        phone: req.params.phone,
-        city: req.params.city
+app.patch('/updateUserRecords/:id', async (req, res) => {
+    const id = req.params.id;
+    const update = await Users.findByIdAndUpdate(id, req.body,{
+        new: true
     })
-    users.update()
-    .then(data => {
-        res.send(data)
-    })
-    .catch(err => {
-        res.send(err)
-    }) 
+        res.status(201).send(update)
 })
 
 
@@ -245,7 +248,9 @@ app.post('/addmorework', async(req, res) => {
 }
 )
 
-app.get('/user-recodrs/:id', (req, res) => {
+
+//get user data
+app.get('/user-recodrs/:id', async(req, res) => {
     console.log(req.params.id)
     Users.find(req.params.id)
     .then(data => {
@@ -256,6 +261,31 @@ app.get('/user-recodrs/:id', (req, res) => {
     }) 
 })
 
+
+//get user data
+app.get('/user/:id', async(req, res) => {
+    console.log(req.params.id)
+    Users.findById(req.params.id)
+    .then(data => {
+        res.send(data)
+    })
+    .catch(err => {
+        res.send(err)
+    }) 
+})
+
+
+//get user data
+app.get('/ustaad/:id', async(req, res) => {
+    console.log(req.params.id)
+    Users.find(req.params.id)
+    .then(data => {
+        res.send(data)
+    })
+    .catch(err => {
+        res.send(err)
+    }) 
+})
 
 //get service data bu user id
 app.get('/service-recodes/:userId', (req, res) => {
@@ -427,7 +457,7 @@ app.post('/avail-service', async(req, res) => {
 
 //api find ustaad where role == ustaad
 app.get('/ustaadlist/:field', async(req, res) => { 
-    Users.find({role: "ustaad", field: req.params.field}).then(data=>{
+    Users.find({field: req.params.field}).then(data=>{
         console.log(data)
         res.send(data)
     }).catch(err=>{

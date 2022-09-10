@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { View, Text, Image, StyleSheet, ScrollView} from 'react-native'
-import { TextInput, Button, Avatar, IconButton, Colors  } from 'react-native-paper';
+import { TextInput, Button, Avatar, IconButton, Colors, ActivityIndicator  } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import { Rating } from 'react-native-ratings';
 
@@ -17,21 +17,35 @@ const longitude = route.params.logitude;
 
 console.log(UstaadData, userId, field, ProblemStatement, latitude, longitude, ustaadId)
 
-// const [data, setData] = useState([])
-// const [loading, setloading] = useState(false)
+const [data, setData] = useState([])
+const [loading, setloading] = useState(false)
 
-// useEffect(()=>{
-//     fetch("http://10.0.2.2:3000/ustaaddata/id?={id}")
-//     .then((res) => res.json())
-//     .then((data) => {
-//         setData(data)
-//         setloading(true)
-//         console.log("hello")
+useEffect(()=>{
+    fetch(`http://localhost:3000/ratingdata/${ustaadId}`)
+    .then((res) => res.json())
+    .then((data) => {
+        setData(data)
+        setloading(true)
+        console.log("hello")
 
-// }).catch(err => {
-//     console.log(err)
-// })
-// },[])
+}).catch(err => {
+    console.log(err)
+})
+
+},[])
+
+
+
+console.log(data, "ratting data")
+
+// if(data.length == 0){
+//     return(
+//                     <View style={{flex: 1, justifyContent:'center', alignItems: 'center'}}>
+//                  <Text style={{color: 'blue'}}>No Results Found</Text>
+//                  <Button color='white' style={{backgroundColor: '#10047c'}} onPress={()=> navigation.navigate("UserMainScreen")}>Back to Dashboard</Button>
+//             </View>
+//     )
+// }
     return (
         <ScrollView>
         <View style={{backgroundColor: '#10047c', flex: 1}}>
@@ -57,31 +71,20 @@ console.log(UstaadData, userId, field, ProblemStatement, latitude, longitude, us
             <Text style={{fontSize: 20}}>{'\n'}About Me</Text>
             <Text style={{padding: 5}} >{UstaadData.value.about}</Text> 
             <Text style={{fontSize: 15}}>{'\n\n'}Feedback from Previous Clients</Text>
+{data.map((val) => {
+    return(
+
 
         <View style={{marginLeft: 10, marginTop: 25, flexDirection: 'row', alignItems: 'center', alignSelf: 'flex-start'}}>
-            <Avatar.Image  size={50} source={require('../../src/assets/Login.png')} />
-            <Text style={{padding: 8}}>Rizwan Ahmed {'\n'}He was Very craetive! {'\n'}                   
-             <Rating showRating={false} readonly={true} ratingCount={5} onFinishRating={(rating) => {console.log("ratting is" + rating)}}  imageSize={15} style={{ paddingVertical: 1 }}/></Text>
+           
+                    <Avatar.Image  size={50} source={require('../../src/assets/Login.png')} />
+            <Text style={{padding: 5}}>{val.rattingComment}  {'\n'}              
+             <Rating showRating={false} readonly={false} ratingCount={5} imageSize={15} style={{ paddingVertical: 1 }}/></Text>
+            
+            
         </View>
-
-        <View style={{marginLeft: 10, marginTop: 25, flexDirection: 'row', alignItems: 'center', alignSelf: 'flex-start'}}>
-            <Avatar.Image  size={50} source={require('../../src/assets/Login.png')} />
-            <Text style={{padding: 8}}>Rizwan Ahmed {'\n'}He was Very craetive! {'\n'}                   
-             <Rating showRating={false} readonly={true} ratingCount={5} onFinishRating={(rating) => {console.log("ratting is" + rating)}}  imageSize={15} style={{ paddingVertical: 1 }}/></Text>
-        </View>
-
-        <View style={{marginLeft: 10, marginTop: 25, flexDirection: 'row', alignItems: 'center', alignSelf: 'flex-start'}}>
-            <Avatar.Image  size={50} source={require('../../src/assets/Login.png')} />
-            <Text style={{padding: 8}}>Rizwan Ahmed {'\n'}He was Very craetive! {'\n'}                   
-             <Rating showRating={false} readonly={true} ratingCount={5} onFinishRating={(rating) => {console.log("ratting is" + rating)}}  imageSize={15} style={{ paddingVertical: 1 }}/></Text>
-        </View>
-
-        <View style={{marginLeft: 10, marginTop: 25, flexDirection: 'row', alignItems: 'center', alignSelf: 'flex-start'}}>
-            <Avatar.Image  size={50} source={require('../../src/assets/Login.png')} />
-            <Text style={{padding: 8}}>Rizwan Ahmed {'\n'}He was Very craetive! {'\n'}                   
-             <Rating showRating={false} readonly={true} ratingCount={5} onFinishRating={(rating) => {console.log("ratting is" + rating)}}  imageSize={15} style={{ paddingVertical: 1 }}/></Text>
-        </View>
-
+           )
+        })}
         </View>           
   </View>
         </ScrollView>

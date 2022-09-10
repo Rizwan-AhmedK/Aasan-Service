@@ -6,7 +6,7 @@ import DatePicker from 'react-native-date-picker';
 
 
 
-export default function EnterDetails({route}) {
+export default function EnterDetails({route, navigation}) {
 
     
 
@@ -14,13 +14,14 @@ export default function EnterDetails({route}) {
   const Id = route.params.Id;
   const data = route.params.userData;
   console.log(data)
-    let emailText, nametext, phonText, cityText;
+    let emailText, nametext, phonText, cityText, id;
 
     data.map((val) => {
         emailText = val.data.email;
         nametext = val.data.name;
         phonText = val.data.phone;
         cityText = val.data.city;
+        id = val.data._id;
     })
   
 const [email, setEmail] = useState(emailText)
@@ -29,12 +30,38 @@ const [phone, setPhone] = useState(phonText)
 const [city, setCity] = useState(cityText)
 
 
-const Update = () => {
+const Update = async () => {
  
-    if(!email.trim()){Alert.alert("Please Enter Email")}
-    else if(!name.trim()){Alert.alert("Please Enter Name")}
-    else if(!phone.trim()){Alert.alert("Please Enter Phone")}
-    else if(!city.trim()){Alert.alert("Please Enter City")}    
+    // if(!email.trim()){Alert.alert("Please Enter Email")}
+    // else if(!name.trim()){Alert.alert("Please Enter Name")}
+    // else if(!phone.trim()){Alert.alert("Please Enter Phone")}
+    // else if(!city.trim()){Alert.alert("Please Enter City")}   
+    
+    
+    const DAT = await fetch(`http://localhost:3000/updateUserRecords/${id}`, {
+        method : "PATCH",
+        headers : {
+            "Content-Type" : "application/json"
+        }, 
+
+        body:JSON.stringify({
+            email, name, phone, city
+        })
+    });
+
+
+    const data2 = await DAT.json()
+    console.log(data2)
+
+
+    if(DAT.status === 422 || !data2){
+        Alert.alert("data not found")
+    }
+    else{
+        Alert.alert("data added")
+    }
+    
+
 }
 
 
@@ -68,7 +95,7 @@ const Update = () => {
 
             <TextInput
             style={{width: 350, marginTop: 10}}
-            keyboardType="phone-pad"
+            // keyboardType="phone-pad"
             value={phone}
             label={phonText}
             onChangeText={setPhone}

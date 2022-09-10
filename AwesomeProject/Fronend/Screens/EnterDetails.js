@@ -62,7 +62,6 @@ const [serviceDetailsAddress, setServiceDetailsAddress] = useState('')
             style={{width: 350, marginTop: 10}}
             label="Name"
             mode='outlined'
-            secureTextEntry
             left={<TextInput.Icon name="account" color="#10047c" />}
             />
 
@@ -122,12 +121,12 @@ const [serviceDetailsAddress, setServiceDetailsAddress] = useState('')
               else if(!serviceDetailsPhone.trim()) {Alert.alert("Please enter phone number")}
               else if(!serviceDetailsAddress.trim()) {Alert.alert("Please Enter complete address")}
               else{navigation.navigate('ShowInspectionPrice', {
-                UserId: id, 
+                by: id, 
                 Field: field, 
                 problemStatement: ProblemStatement, 
                 Latitude: latitude, 
                 Longititude: longitude,
-                UstaadId:ustaadId,
+                fors:ustaadId,
                 Date:date,
                 Email: serviceDetailsEmail,
                 Name: serviceDetailsName,

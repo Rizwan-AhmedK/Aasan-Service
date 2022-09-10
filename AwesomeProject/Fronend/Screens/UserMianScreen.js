@@ -4,6 +4,7 @@ import { TextInput, Button, Avatar, IconButton, Colors, ActivityIndicator  } fro
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { FAB } from 'react-native-paper';
+import { isSearchBarAvailableForCurrentPlatform } from 'react-native-screens';
 
 
 export default function UserMainScreen({route}) {
@@ -11,7 +12,6 @@ export default function UserMainScreen({route}) {
 const navigation = useNavigation();
 const [data, setData] = useState([])
 const [serviceData, setServiceData] = useState([])
-const [newData, setNewData] = useState([])
 const [loading, setLoading] = useState(true)
 const [refreshing, setRefreshing] = React.useState(false);
 
@@ -29,11 +29,6 @@ const [refreshing, setRefreshing] = React.useState(false);
 // }
 
     
-const onRefresh = React.useCallback(() => {
-    setRefreshing(true);
-    wait(2000).then(() => setRefreshing(false));
-  }, []);
-
 
 async function fun () {
     let user = await AsyncStorage.getItem('user');
@@ -44,7 +39,6 @@ async function fun () {
     let hello = JSON.parse(user)
     let userId = hello.data._id;
     let role = hello.data.role;
-    let ustaadId = '';
 
     fetch(`http://localhost:3000/service-recodes/${userId}`)
             .then((res) => res.json())
@@ -54,20 +48,9 @@ async function fun () {
             //     console.log(i.ustaadId)
             // ))
         }) 
-    }
 
+}
 
-     
-        //     const ustaadId = [...new Set(serviceData.map(item => item.ustaadId))];
-        //     console.log(ustaadId)
-        //     fetch(`http://10.0.2.2:3000/user-recodrs/${ustaadId}`)
-        //     .then((res) => res.json())
-        //     .then (newData => {
-        //         let pak = JSON.parse(newData)
-        //     setNewData(pak)
-        //  })
-    
-    
 
 useEffect(() => {     
     fun()
@@ -114,12 +97,14 @@ useEffect(() => {
     
              Services
             </Button>
+            
             <Text style={{color: '#10047c', fontSize: 35, marginTop: 35, fontWeight: 'bold'}}>Order(s) Details</Text>    
-              {serviceData.map((item, ndx)=>(
+              {
+              serviceData.map((item, ndx)=>(
                 <View key={ndx} style={{marginLeft: 10, marginTop: 25, flexDirection: 'row', alignItems: 'center', alignSelf: 'flex-start'}}>
                     
                     <Avatar.Image  size={50} source={require('../../src/assets/Login.png')} />
-                    <Text style={{padding: 8}}>Hello, {item.userId}  {'\n'}{item.ustaadId}, <Text onPress={() => navigation.navigate("SeeServiceDetails", {Id: item._id})} style={{color: '#10047c', fontWeight: 'bold'}}>View Details</Text></Text>
+                    <Text style={{padding: 8}}> Service : {item.field} {'\n'} ID : {item.ustaadId}, <Text onPress={() => navigation.navigate("SeeServiceDetails", {Id: item._id})} style={{color: '#10047c', fontWeight: 'bold'}}>View Details</Text></Text>
                 </View>
             ))}
         </View>

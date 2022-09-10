@@ -32,11 +32,17 @@ console.log(rattingData)
 
 if(rattingData.length == 0){
     return(
+        <>
         <ActivityIndicator 
         animating = {loading}
         color = '#bc2b78'
         size = "large"
         />
+        <View style={{flex: 1, justifyContent:'center', alignItems: 'center'}}>
+        <Text style={{color: 'blue'}}>No Results Found</Text>
+        <Button style={{marginTop: 10, backgroundColor: '#10047c'}}  color='white' onPress={() => navigation.goBack()}> Back To Dashboard </Button>
+   </View>
+   </>
     )
 }else{
     return (
@@ -57,7 +63,7 @@ if(rattingData.length == 0){
         <List.Section>
             <List.Item title={val.title} style={{color: '#10047c'}} left={() => <List.Icon icon="bell" color='#10047c'/>} />
             <Button style={{marginTop: 20,position: 'absolute', right: 15, backgroundColor: 'green'}}  color='white' onPress={()=> {navigation.navigate("AcceptAndRejectScreen", {
-                        Title: val.title, 
+                        Title: val.title, data: [val] ,
                         by: val.by, deatils: val.workDetails, message: val.message, amount: val.workAmount,for: val.fors, id: val._id })}}>Open</Button> 
                 <View style={{ borderBottomColor: 'gray', borderBottomWidth: 1}} />
 

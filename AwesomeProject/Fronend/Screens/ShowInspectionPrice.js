@@ -8,24 +8,25 @@ import {Button} from 'react-native-paper';
 export default function ShowInspectionPrice( { navigation, route } ) {
 
   const {
-    UserId, 
+    by, 
     Field, 
     problemStatement, 
     Latitude, 
     Longititude, 
-    UstaadId, 
+    fors, 
     Date, 
     Email, 
     Name, 
     Phone, 
     Address } = route.params;
 
-    console.log(UserId, 
+    console.log(
+      by, 
       Field, 
       problemStatement, 
       Latitude, 
       Longititude, 
-      UstaadId, 
+      fors, 
       Date, 
       Email,
       Name, 
@@ -50,12 +51,12 @@ export default function ShowInspectionPrice( { navigation, route } ) {
 
             
             <Button style={{backgroundColor: '#10047c', marginTop:60, width: '50%'}} mode="contained" onPress={() => navigation.navigate('PaymentSystem', {
-              userId:UserId, 
+              by:by, 
               field:Field, 
               problemStatement:problemStatement, 
               latitude:Latitude, 
               longititude:Longititude, 
-              ustaadId:UstaadId, 
+              fors:fors, 
               date:Date, 
               email:Email, 
               name:Name, 
