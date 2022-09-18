@@ -5,6 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { FAB } from 'react-native-paper';
 import { isSearchBarAvailableForCurrentPlatform } from 'react-native-screens';
+import UstaadMainScreen from "../Screens/UstaadMainScreen";
 
 
 export default function UserMainScreen({route}) {
@@ -14,21 +15,7 @@ const [data, setData] = useState([])
 const [serviceData, setServiceData] = useState([])
 const [loading, setLoading] = useState(true)
 const [refreshing, setRefreshing] = React.useState(false);
-
-
-
-// function timeFunction() {
-//     setTimeout(function(){ 
-//         let userId = "65654655155151656"; 
-//         fetch(`http://10.0.2.2:3000/service-recodes/${userId}`)
-//     .then((res) => res.json())
-//     .then (serviceData => {
-//         console.log(serviceData)
-//     setServiceData(serviceData)
-// })}, 5000);
-// }
-
-    
+const [role, setRole] = useState('')
 
 async function fun () {
     let user = await AsyncStorage.getItem('user');
@@ -38,7 +25,7 @@ async function fun () {
     
     let hello = JSON.parse(user)
     let userId = hello.data._id;
-    let role = hello.data.role;
+    setRole(hello.data.role)
 
     fetch(`http://localhost:3000/service-recodes/${userId}`)
             .then((res) => res.json())
@@ -49,7 +36,11 @@ async function fun () {
             // ))
         }) 
 
+
+        
+
 }
+
 
 
 useEffect(() => {     
@@ -61,7 +52,13 @@ useEffect(() => {
 },[])
 
 
+if(role == "ustaad"){
+    return(
+        <UstaadMainScreen />
+    )
+}
 
+else{
 // console.log(data.email)
     if(data.length == 0){   
         return(
@@ -75,7 +72,6 @@ useEffect(() => {
 
     else{
         id = data.data._id;
-     
 
     return (
         <ScrollView>
@@ -83,7 +79,7 @@ useEffect(() => {
                 
         <View style={{backgroundColor: '#10047c', flex: 1}}>
         <View style={{backgroundColor: '#10047c', flex: 1, alignItems: 'center', justifyContent: 'center', marginTop: 10}}> 
-            <Avatar.Image  size={60} source={require('../../src/assets/Login.png')} />
+            <Avatar.Image  size={60} source={{uri: data.data.profile}} />
         <Text style={{color: "white", fontSize: 20, marginTop: 10, marginBottom: 10, textAlign: 'center'}}>{data.data.name}{'\n'} <Text style={{fontSize: 15}}>{data.data.role}</Text></Text>
 
         <View style={{flex: 1, flexDirection: 'row', alignContent: 'center', alignItems: 'center'}}>
@@ -108,18 +104,11 @@ useEffect(() => {
                 </View>
             ))}
         </View>
-        <FAB
-    icon="plus"
-    style={{position: 'absolute',
-    margin: 16,
-    right: 0,
-    bottom: 0,}}
-    onPress={() => console.log('Pressed')}
-  />           
+          
   </View>
         </ScrollView>
         
     )}
 }
 
-
+}

@@ -30,6 +30,8 @@ const dispatch = useDispatch();
 const submit = () => {
   if(!username.trim()){Alert.alert("Please Enter the Email")}
   else if(!password.trim()){Alert.alert("Please Enter the Password")}
+  // else if (!username.match('[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+[.]{1}[a-zA-Z]{2,}$')){Alert.alert("please enter a valid email")}
+  
 
   else{dispatch(Login(username, password))}
   

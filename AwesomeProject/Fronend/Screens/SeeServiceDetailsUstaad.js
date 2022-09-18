@@ -50,7 +50,11 @@ console.log(ustaaddata, "pakistan")
 
         <View style={{backgroundColor: 'white', alignItems: 'center', flex: 2.5, borderTopLeftRadius: 30, borderTopRightRadius: 30}}>
         <Text style={{textAlign: "center", marginTop: 30, fontSize: 25, fontWeight: 'bold'}}>Your task is at the given location {'\n'}<Text style={{marginTop: 40, fontWeight: 'normal'}}>Latitude: {servicedata.latitude}{'\n'}Longitude: {servicedata.longititude}</Text></Text>
+        <Button style={{marginTop: 7, backgroundColor: '#10047c', paddingLeft: 5, paddingRight: 5, width: "80%"}} mode="contained" onPress={() => navigation.navigate('MapsliveLocation', {lat: servicedata.latitude, long: servicedata.longititude})}>
+            Live Location
+        </Button>
         <Text style={{textAlign: "center", marginTop: 30, fontSize: 25, fontWeight: 'bold'}}>On the following Date and Time {'\n'}<Text style={{marginTop: 40, fontWeight: 'normal'}}>{servicedata.date}</Text></Text>
+        
         
         <Button style={{marginTop: 70, backgroundColor: 'green', paddingLeft: 5, paddingRight: 5, width: "80%"}} mode="contained" onPress={() => navigation.navigate('TaskCompleted', {userID: servicedata.userId, ustaadID: servicedata.ustaadId, Role: 'ustaad'})}>
             Work completed

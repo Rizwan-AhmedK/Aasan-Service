@@ -10,8 +10,34 @@ export default function signUpUstaad() {
     const [pass, setPass] = React.useState('');
     const [repass, setrePass] = React.useState('');
     const role = 'Ustaad';
+    const [passnull, setPassNull] = React.useState(true);
+
     
     const navigation = useNavigation();
+
+
+    const validatedata = () => {
+      fetch(`http://localhost:3000/useremail/${email}`)
+      .then((res) => {
+         
+          if(res.status === 200){
+              // Alert.alert("User Already Exists! Please Login")
+              navigation.navigate('SignUpUstaadStep2', {
+                Email: email, 
+                Name: name, 
+                Pass: pass, 
+                RePass: repass, 
+                Role: role
+              })
+              // navigation.navigate("signUp_User_Step_2", {Name: name, Email: email, Pass: pass, Repass: repass, Role: role})
+          }
+          else if(res.status === 404){
+              Alert.alert("User Already Exists! Please Login")
+  
+          }
+      }
+      
+    )}
 
     return (
         <ScrollView>
@@ -45,6 +71,8 @@ export default function signUpUstaad() {
             onChangeText={setPass}
             value={pass}
             left={<TextInput.Icon name="lock" color="#10047c" />}
+            secureTextEntry={passnull}
+            right={<TextInput.Icon name="eye" color="#10047c" onPress={()=> setPassNull(false)}/>}
             />
 
             <TextInput style={{width: 350, marginTop: 10}}
@@ -53,6 +81,8 @@ export default function signUpUstaad() {
             onChangeText={setrePass}
             value={repass}
             left={<TextInput.Icon name="lock" color="#10047c" />}
+            secureTextEntry={passnull}
+            right={<TextInput.Icon name="eye" color="#10047c" onPress={()=> setPassNull(false)}/>}
             />
 
             
@@ -60,16 +90,13 @@ export default function signUpUstaad() {
             {if(pass !== repass){Alert.alert("Your password does not matched")}
              else if(!pass.trim()){Alert.alert("Please enter your password")}
              else if(!email.trim()){Alert.alert("Plaese enter your email")}
+             else if(pass.trim().length < 6){Alert.alert("Password must be of greater then or equal to 6 characters")}
+             else if (!email.match('[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+[.]{1}[a-zA-Z]{2,}$')){Alert.alert("Please enter a valid email")}
              else if(!name.trim()){Alert.alert("please enter your name")}
              
             else {
-              navigation.navigate('SignUpUstaadStep2', {
-              Email: email, 
-              Name: name, 
-              Pass: pass, 
-              RePass: repass, 
-              Role: role
-            })}
+              validatedata()
+          }
             }}
 
 
@@ -78,7 +105,7 @@ export default function signUpUstaad() {
             </Button>
 
             <Text style={{paddingTop: 10, marginBottom: 80}}>I already have an Account?<Text style={{fontWeight: 'bold', color: "#10047c"}}  
-              onPress={() => navigation.navigate('LoginUser', {User: "Ustaad"}) }>
+              onPress={() => navigation.navigate('LoginUser', {user: "Ustaad"}) }>
                 Login</Text>
             </Text>
         </View>           

@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import { View, Text, Image, StyleSheet, ScrollView, Picker, Alert, Modal} from 'react-native'
+import { View, Text, Image, StyleSheet, ScrollView, Picker, Alert, Modal, ActivityIndicator} from 'react-native'
 import { TextInput, Button, Checkbox  } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker'; 
@@ -24,6 +24,9 @@ const [checked, setChecked] = useState(false);
 const [about, setAbout] = useState("");
 const [frontCNIC, setFrontCNIC] = useState('')
 const [modal, setModal] = useState(false)
+const [modalProfile, setModalProfile] = useState(false)
+const [profile, setProfile] = useState('')
+const [laoding, setLoading] = useState(false)
 
 
 const name = route.params.Name;
@@ -67,6 +70,7 @@ const submitData = () => {
           city,
           field,
           frontCNIC,
+          profile
       })
   })
   
@@ -81,6 +85,8 @@ const submitData = () => {
   showAlert()
  
 }
+
+
 
 
 let options={
@@ -111,6 +117,22 @@ if (!images.didCancel){
 }
 }
 
+const openCamera2 = async() => {
+  const images = await launchCamera(options);
+  if (!images.didCancel){
+    let newFile = {uri: images.assets[0].uri, type: images.assets[0].type, name : images.assets[0].fileName}
+    handleUploadProfile(newFile)
+  }
+  }
+  
+  const openGalary2 = async() => {
+  const images = await launchImageLibrary(options);
+  if (!images.didCancel){
+   let newFile = {uri: images.assets[0].uri, type: images.assets[0].type, name : images.assets[0].fileName}
+   handleUploadProfile(newFile)
+  }
+  }
+
 const handleUpload = (image) => {
 const data = new FormData()
 data.append('file', image)
@@ -127,6 +149,24 @@ then(data => {
   setModal(false)
 })
 }
+
+
+const handleUploadProfile = (image) => {
+  const data = new FormData()
+  data.append('file', image)
+  data.append('upload_preset', 'usersAsanService')
+  data.append('cloud_name', 'react-native-employee')
+  
+  fetch("https://api.cloudinary.com/v1_1/react-native-employee/image/upload", {
+    method:"post",
+    body:data
+  }).then(res => res.json()).
+  then(data => {
+    console.log(data)
+    setProfile(data.url)
+    setModalProfile(false)
+  })
+  }
 
     return (
         <ScrollView>
@@ -162,9 +202,13 @@ then(data => {
               Upload CNIC
             </Button>
 
+            <Button icon={profile==""?"image-area":"check"} style={{backgroundColor: 'green', marginTop: 10, width: '80%'}} mode="contained"  onPress={() => setModalProfile(true)}>
+              Upload Profile
+            </Button>
+
        
             
-            <Button icon="check" style={{backgroundColor: '#10047c', marginTop: 10, marginBottom: 170, width: '80%'}} mode="contained" onPress={() => {
+            <Button style={{backgroundColor: '#10047c', marginTop: 40, marginBottom: 100, width: '80%'}} mode="contained" onPress={() => {
               if (!checked) {Alert.alert("Please Agree to our terms and conditions")}
               else if (!frontCNIC.trim()) {Alert.alert("Plaese Upload CNIC")}
               else if (!about.trim()) {Alert.alert("Plaese write something about yourself", "example: i am an electrian, i can do...")}
@@ -181,6 +225,12 @@ then(data => {
           visible={modal}
           style={{backgroundColor: "white", position: 'absolute', top: 2, width: "100%"}}
         >
+{/*         
+              <ActivityIndicator
+               animating = {modal}
+               color = '#bc2b78'
+               size = "large"
+               /> */}
 
     <View style={{alignContent: 'center', alignItems: 'center', flexDirection: "row", justifyContent: 'space-around', marginTop: 350}}>
     <Button icon={frontCNIC==""?"camera":"check"} style={{backgroundColor: '#10047c'}} mode="contained"  onPress={openCamera}>
@@ -192,6 +242,29 @@ then(data => {
     </Button>
     </View>
      <Button style={{backgroundColor: 'red', marginTop: 20, margin: 40}} mode="contained" onPress={() => setModal(false)}>
+      cancel
+    </Button>
+      
+  </Modal>
+
+
+          <Modal
+          animatedType="slide"
+          transparent={false}
+          visible={modalProfile}
+          style={{backgroundColor: "white", position: 'absolute', top: 2, width: "100%"}}
+        >
+
+    <View style={{alignContent: 'center', alignItems: 'center', flexDirection: "row", justifyContent: 'space-around', marginTop: 350}}>
+    <Button icon={profile==""?"camera":"check"} style={{backgroundColor: '#10047c'}} mode="contained"  onPress={openCamera2}>
+        Camera
+    </Button>
+
+    <Button icon={profile==""?"image-area":"check"} style={{backgroundColor: '#10047c'}} mode="contained" onPress={openGalary2}>
+      Galary
+    </Button>
+    </View>
+     <Button style={{backgroundColor: 'red', marginTop: 20, margin: 40}} mode="contained" onPress={() => setModalProfile(false)}>
       cancel
     </Button>
       

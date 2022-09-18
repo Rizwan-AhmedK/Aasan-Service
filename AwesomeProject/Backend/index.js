@@ -262,7 +262,7 @@ app.get('/user-recodrs/:id', async(req, res) => {
 })
 
 
-//get user data
+//get user data by id
 app.get('/user/:id', async(req, res) => {
     console.log(req.params.id)
     Users.findById(req.params.id)
@@ -272,6 +272,23 @@ app.get('/user/:id', async(req, res) => {
     .catch(err => {
         res.send(err)
     }) 
+})
+
+
+//get user data
+app.get('/useremail/:email', async(req, res) => {
+    // const email = req.params.email;
+    // console.log(email)
+   Users.findOne({ email: req.params.email })
+  .then(data => {
+    if(data !== null){
+        res.status(404).json({message : "data exists"})
+    }
+   else if(data == null){
+    res.status(200).json({message : "ok"})
+    }
+  })
+
 })
 
 
@@ -354,8 +371,11 @@ app.post('/login', async(req , res) => {
     const {email, pass} =  req.body;
 
     Users.findOne({email}).then(data => {
+
         if(!data){return res.status(404).json({message: "User not Found"});}
+
         else{
+            
             bcrypt.compare(pass, data.pass, (err, compareRes) => {
                 if(err) {res.status(502).json({message: "Error your message "});}
                 else if (compareRes) {
@@ -382,8 +402,13 @@ app.post('/usersignup', async(req, res) => {
     const repassword = await bcrypt.hash(repass, 10)
 
     const existUsername = await Users.findOne({ email });
+
+    if (!existUsername) {
+        return res.status(200).json({message: "OK"})
+       }
+
    if (existUsername) {
-     res.send('User already exists');
+    return res.status(404).json({message: "User Already Registered"})
    }
    else{
     const user = new Users({
@@ -394,9 +419,11 @@ app.post('/usersignup', async(req, res) => {
         role:req.body.role,
         phone:req.body.phone,
         city:req.body.city,
-        frontCNIC:req.body.frontCNIC
+        frontCNIC:req.body.frontCNIC, 
+        profile: req.body.profile
         })
     user.save()
+    
     .then(data=>{
         console.log(data)
         res.send("saved")
@@ -404,7 +431,9 @@ app.post('/usersignup', async(req, res) => {
         console.log(err)
     })
 }
+
 })
+
 
 
 app.post('/ustaadsignup', async(req, res) => { 
@@ -421,7 +450,8 @@ app.post('/ustaadsignup', async(req, res) => {
         city:req.body.city,
         field:req.body.field,
         about:req.body.about,
-        frontCNIC:req.body.frontCNIC })
+        frontCNIC:req.body.frontCNIC,
+        profile: req.body.profile })
     user.save()
     .then(data=>{
         console.log(data)

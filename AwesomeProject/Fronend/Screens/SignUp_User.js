@@ -1,6 +1,6 @@
 import React from 'react'
 import { View, Text, Image, StyleSheet, ScrollView, Alert} from 'react-native'
-import { TextInput, Button } from 'react-native-paper';
+import { TextInput, Button, ActivityIndicator } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 
 
@@ -12,11 +12,28 @@ const [email, setEmail] = React.useState('');
 const [name, setName] = React.useState('');
 const [pass, setPass] = React.useState('');
 const [repass, setrePass] = React.useState('');
+const [loading, setloading] = React.useState(true);
 const role = 'User';
 
-const submitData = () => {
-    navigation.navigate("signUp_User_Step_2", {Name: name, Email: email, Pass: pass, Repass: repass, Role: role})
-}
+
+const validatedata = () => {
+    fetch(`http://localhost:3000/useremail/${email}`)
+    .then((res) => {
+       
+        if(res.status === 200){
+            // Alert.alert("User Already Exists! Please Login")
+            // setloading(false)
+            navigation.navigate("signUp_User_Step_2", {Name: name, Email: email, Pass: pass, Repass: repass, Role: role})
+
+        }
+        else if(res.status === 404){
+            // setloading(false)
+            Alert.alert("User Already Exists! Please Login")
+
+        }
+    }
+    
+  )}
 
     return (
         <ScrollView>
@@ -65,15 +82,24 @@ const submitData = () => {
 
             
             <Button icon="arrow-right-bold" style={{backgroundColor: '#10047c', marginTop: 75, width: '80%'}} mode="contained"
-             onPress={() => {if(pass !== repass){Alert.alert("Your password does not matched")}
+             onPress={() => {
+            if(pass !== repass){Alert.alert("Your password does not matched")}
              else if(!pass.trim()){Alert.alert("Please enter your password")}
+             else if(pass.trim().length < 6){Alert.alert("Password must be of greater then or equal to 6 characters")}
              else if(!email.trim()){Alert.alert("Plaese enter your email")}
-             else if(!name.trim()){Alert.alert("please enter your name")} else{submitData()}}
+             else if (!email.match('[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+[.]{1}[a-zA-Z]{2,}$')){Alert.alert("Please enter a valid email")}
+             else if(!name.trim()){Alert.alert("please enter your name")} else{
+            //     <ActivityIndicator
+            //    animating = {loading}
+            //    color = '#bc2b78'
+            //    size = "large"
+            //    />
+                validatedata()}}
              }>
               Next
             </Button>
 
-            <Text style={{paddingTop: 10, marginBottom: 75}}>I already have an Account?<Text style={{fontWeight: 'bold', color: "#10047c"}}  onPress={() => navigation.navigate('LoginUser')}>Login</Text></Text>
+            <Text style={{paddingTop: 10, marginBottom: 75}}>I already have an Account?<Text style={{fontWeight: 'bold', color: "#10047c"}}  onPress={() => navigation.navigate('LoginUser', {user: "user"})}>Login</Text></Text>
            
             
         </View>           

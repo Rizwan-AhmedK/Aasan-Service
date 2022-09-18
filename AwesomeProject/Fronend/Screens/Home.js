@@ -1,11 +1,41 @@
-import React from "react";
+import React, {useState} from "react";
 import { View, Text, Image, StyleSheet, Pressable} from 'react-native';
+import {useNetInfo} from "@react-native-community/netinfo";
 import { useNavigation } from '@react-navigation/native';
+import { Alert } from "react-native";
+import { TextInput, Button } from 'react-native-paper';
+
+import { useEffect } from "react";
+import { IconButton } from "react-native-paper";
 
 const Home = () => {
 const navigation = useNavigation();
+const netInfo = useNetInfo();
+
+const [internetCheck, setInternetCheck] = useState(0);
+
+useEffect(() => {
+
+}, [internetCheck])
+
+if(!netInfo.isConnected){
+    return(
+        <View style={{flex: 1, justifyContent: "center", alignItems: "center"}}>
+            <IconButton icon="wifi" size={80} color="gray" />
+            <Text style={{fontSize: 40}}>You are offline</Text>
+            <Text>Please Check Your internet connection</Text>
+            <Pressable style={styles.button} >
+                        <Text style={styles.buttontext}>Referesh Page</Text>
+                    </Pressable>
+        </View>
+   
+    )
+}
+
+if(netInfo.isConnected) {
     return(
         <View style={styles.SplashScreen_RootView}>  
+       
                 <View style={styles.SplashScreen_ChildView}>  
                     <Image source={require('../../src/assets/logo.png')}  
                         style={{width:'35%', height: '35%', resizeMode: 'contain'}} />  
@@ -26,6 +56,7 @@ const navigation = useNavigation();
           
     )  
 }
+}
 
 const styles = StyleSheet.create(  
     {  
@@ -33,7 +64,6 @@ const styles = StyleSheet.create(
         {  
             justifyContent: 'center',  
             flex:1,  
-            margin: 10,  
             position: 'absolute',  
             width: '100%',  
             height: '100%',  

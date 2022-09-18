@@ -117,6 +117,7 @@ const [serviceDetailsAddress, setServiceDetailsAddress] = useState('')
             <Button icon="arrow-right-bold" style={{backgroundColor: '#10047c', marginTop: 25}} mode="contained" onPress={() => {
               if(!date){Alert.alert("Plaese enter date")}
               else if(!serviceDetailsEmail.trim()) {Alert.alert("Please enter email")}
+              else if (!serviceDetailsEmail.match('[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+[.]{1}[a-zA-Z]{2,}$')){Alert.alert("please enter a valid email")}
               else if(!serviceDetailsName.trim()) {Alert.alert("Plaese enetr the name")}
               else if(!serviceDetailsPhone.trim()) {Alert.alert("Please enter phone number")}
               else if(!serviceDetailsAddress.trim()) {Alert.alert("Please Enter complete address")}

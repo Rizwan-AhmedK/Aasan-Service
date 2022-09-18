@@ -43,6 +43,8 @@ import UserSettings from "./Fronend/Screens/UserSettings";
 import SeeServiceDetailsUstaad from "./Fronend/Screens/SeeServiceDetailsUstaad";
 import AcceptAndRejectScreen from "./Fronend/Screens/AcceptAndRejectScreen";
 import ExtraWorkDetails from "./Fronend/Screens/ExtraWorkDetails";
+import MapsliveLocation from './Fronend/Screens/MapsliveLocation';
+// import MainScreen from "./Fronend/Screens/MainScreen"
 
 
 const Stack = createNativeStackNavigator();
@@ -61,13 +63,16 @@ const MyStack = () => {
     <Stack.Navigator initialRouteName={user === "user" ? "UserMainScreen":"UstaadMainScreen"} screenOptions= {{headerShown: false}}>
         
         <Stack.Screen name="UserMainScreen" component={UserMainScreen} />
+      
         
         <Stack.Screen name="UstaadMainScreen" component={UstaadMainScreen} />
         
+        {/* <Stack.Screen name="MainScreen" component={MainScreen} /> */}
         
 
 
         <Stack.Screen name="ForgetPassword" component={ForgetPassword} />
+        <Stack.Screen name="MapsliveLocation" component={MapsliveLocation} />
         <Stack.Screen name="Services" component={Services} />
         <Stack.Screen name="UserSettings" component={UserSettings} />
         <Stack.Screen name="ViewDetailsUser" component={ViewDetailsUser} />

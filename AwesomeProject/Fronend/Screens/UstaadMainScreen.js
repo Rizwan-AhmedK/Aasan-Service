@@ -91,7 +91,7 @@ useEffect(() => {
         <ScrollView>
         <View style={{backgroundColor: '#10047c', flex: 1}}>
         <View style={{backgroundColor: '#10047c', flex: 1, alignItems: 'center', justifyContent: 'center', marginTop: 10}}> 
-            <Avatar.Image  size={60} source={require('../../src/assets/Login.png')} />
+            <Avatar.Image  size={60} source={{uri: data.data.profile}} />
         <Text style={{color: "white", fontSize: 20, marginTop: 10, marginBottom: 10, textAlign: 'center'}}>{data.data.name}{'\n'} <Text style={{fontSize: 15}}>{data.data.role}</Text></Text>
 
         <View style={{flex: 1, flexDirection: 'row', alignContent: 'center', alignItems: 'center'}}>
@@ -103,7 +103,7 @@ useEffect(() => {
         <View style={{backgroundColor: 'white', alignItems: 'center', flex: 2.5, borderTopLeftRadius: 30, borderTopRightRadius: 30}}>
 
         <Text style={{color: '#10047c', fontSize: 35, marginTop: 35, fontWeight: 'bold'}}>Earning</Text>    
-        <Text style={{color: '#10047c', fontSize: 20, marginTop: 35, fontWeight: 'bold'}}>Rs. 5099</Text>    
+        <Text style={{color: '#10047c', fontSize: 20, marginTop: 35, fontWeight: 'bold'}}>Rs. 0</Text>    
 
 
             <Text style={{color: '#10047c', fontSize: 35, marginTop: 35, fontWeight: 'bold'}}>Order(s) Details</Text>    
@@ -115,14 +115,7 @@ useEffect(() => {
                 </View>
             ))}
         </View>
-        <FAB
-    icon="plus"
-    style={{position: 'absolute',
-    margin: 16,
-    right: 0,
-    bottom: 0,}}
-    onPress={() => console.log('Pressed')}
-  />           
+        
   </View>
         </ScrollView>
         

@@ -81,7 +81,7 @@ const [phone, setPhone] = useState("");
             Next</Button>
 
             <Text style={{paddingTop: 10, marginBottom: 78}}>I already have an Account?<Text style={{fontWeight: 'bold', color: "#10047c"}} 
-             onPress={() => navigation.navigate('LoginUser', {User: "Ustaad"})}>Login</Text></Text>
+             onPress={() => navigation.navigate('LoginUser', {user: "Ustaad"})}>Login</Text></Text>
             
            
             

@@ -10,7 +10,8 @@ const UserSchema = new mongoose.Schema({
     city: String,
     about: String,
     field: String,
-    frontCNIC: String
+    frontCNIC: String, 
+    profile: String
 })
 mongoose.model("Users", UserSchema);
 
