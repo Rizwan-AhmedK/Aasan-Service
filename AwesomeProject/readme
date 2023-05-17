@@ -3,9 +3,9 @@ This is a Hybird Mobile application which is purely build with react native, thi
 this application is used to hire mechanics which are around you and can give you service at your doorstep, a very simple and user friendly interface. 
 complete documentation is also available.
 
-how to run this
+how to run this => react native CLI
 download repository
 npm install
 cd backend 
 npm install
-npm start
+npx react-native run-android
