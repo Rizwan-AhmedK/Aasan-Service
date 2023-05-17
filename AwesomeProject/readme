@@ -1,0 +1,11 @@
+Aasan Service 1.0.2
+This is a Hybird Mobile application which is purely build with react native, this is a complete service application with complete backend and frontend. 
+this application is used to hire mechanics which are around you and can give you service at your doorstep, a very simple and user friendly interface. 
+complete documentation is also available.
+
+how to run this
+download repository
+npm install
+cd backend 
+npm install
+npm start
